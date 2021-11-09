@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 40fa2ce498189774cbe61c40a9f2a367, type: 2}
 --- !u!4 &118061103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2168685832825725288, guid: f966d787d1c557e40bdcb25e3504e091, type: 3}
@@ -348,8 +348,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 0.0007742987, y: 0.9661281, z: -0.2580455, w: 0.0028989632}
-  m_LocalPosition: {x: 1.006506, y: 6.263997, z: 10.1823435}
+  m_LocalRotation: {x: -0.0032517996, y: 0.9010732, z: -0.43360212, w: -0.0067584896}
+  m_LocalPosition: {x: -0.14948142, y: 38.983288, z: 34.894897}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1995854622}
@@ -403,7 +403,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1942026713
 Transform:
@@ -514,25 +514,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2001590571 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5305654138940634039, guid: 936fcbfc5dac2984fb41ffdc046b4e65, type: 3}
-  m_PrefabInstance: {fileID: 5305654139734125212}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2001590572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2001590571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offsetX: 0
-  offsetY: 0
 --- !u!1 &2138677391
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,7 +588,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 7.58e-43, y: 1.9236211e-17, z: 7.58e-43, w: 9.953153e+29}
+  m_BoundingSphereOverride: {x: 0, y: 1.1743e-41, z: 0, w: 13.125}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
