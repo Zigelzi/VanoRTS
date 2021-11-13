@@ -9,6 +9,8 @@ public class UnitSelectionHandler : MonoBehaviour
     Camera mainCamera;
     List<Unit> selectedUnits = new List<Unit>();
 
+    public List<Unit> SelectedUnits { get { return selectedUnits; } }
+
     void Start()
     {
         mainCamera = Camera.main;    
@@ -16,9 +18,13 @@ public class UnitSelectionHandler : MonoBehaviour
 
     void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (MultiSelectEnabled())
         {
-            ClearSelection();
+            SelectAllUnitsInArea();
+        }
+        else if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            ResetSelection();
 
         }
         else if (Mouse.current.leftButton.wasReleasedThisFrame)
@@ -27,7 +33,19 @@ public class UnitSelectionHandler : MonoBehaviour
         }
     }
 
-    void ClearSelection()
+    bool MultiSelectEnabled()
+    {
+        if (Mouse.current.leftButton.wasPressedThisFrame && Keyboard.current.shiftKey.isPressed)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void ResetSelection()
     {
         DeselectAllUnits();
 
@@ -45,8 +63,10 @@ public class UnitSelectionHandler : MonoBehaviour
     void SelectAllUnitsInArea()
     {
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
+        RaycastHit hit;
+
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
             AddUnitToSelection(hit);
         }

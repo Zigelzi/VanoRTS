@@ -11,7 +11,6 @@ public class UnitMovement : NetworkBehaviour
     NavMeshAgent navAgent;
 
     #region Server
-
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -20,7 +19,7 @@ public class UnitMovement : NetworkBehaviour
     }
 
     [Command]
-    void CmdMove(Ray destination)
+    public void CmdMove(Ray destination)
     {
         if (Physics.Raycast(destination, out RaycastHit rayHit, Mathf.Infinity))
         {
@@ -28,39 +27,9 @@ public class UnitMovement : NetworkBehaviour
         }
     }
 
-   
-
     #endregion
 
     #region Client
-
-    public override void OnStartAuthority()
-    {
-        base.OnStartAuthority();
-
-        
-        mainCamera = Camera.main;
-    }
-
-    [ClientCallback]
-    void Update()
-    {
-        if (!hasAuthority) { return; }
-
-        HandleMovementCommand();
-    }
-
-    void HandleMovementCommand()
-    {
-        if (Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            Ray destination = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            CmdMove(destination);
-        }
-
-    }
-
-
 
     #endregion
 }

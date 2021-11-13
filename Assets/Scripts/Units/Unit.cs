@@ -7,9 +7,21 @@ public class Unit : NetworkBehaviour
 {
     [SerializeField] UnityEvent onSelected;
     [SerializeField] UnityEvent onDeselected;
-
+    UnitMovement unitMovement;
 
     #region Client
+    public override void OnStartAuthority()
+    {
+        base.OnStartAuthority();
+
+        unitMovement = GetComponent<UnitMovement>();
+    }
+
+    public UnitMovement GetUnitMovement()
+    {
+        return unitMovement;
+    }
+
     [Client]
     public void Select()
     {
