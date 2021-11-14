@@ -6,6 +6,7 @@ using Mirror;
 public class RtsNetworkPlayer : NetworkBehaviour
 {
     [SerializeField] List<Unit> playerUnits = new List<Unit>();
+    public List<Unit> PlayerUnits { get { return playerUnits; } }
 
     #region Server
     public override void OnStartServer()
