@@ -11,6 +11,20 @@ public class UnitMovement : NetworkBehaviour
     NavMeshAgent navAgent;
 
     #region Server
+
+    [ServerCallback]
+    void Update()
+    {
+        ResetPathAtDestination();
+    }
+
+    void ResetPathAtDestination()
+    {
+        if (navAgent.hasPath && navAgent.remainingDistance < navAgent.stoppingDistance)
+        {
+            navAgent.ResetPath();
+        }
+    }
     public override void OnStartServer()
     {
         base.OnStartServer();

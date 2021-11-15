@@ -32,11 +32,8 @@ public class UnitSelectionHandler : MonoBehaviour
 
     void HandleSelection()
     {
-        if (MultiSelectEnabled())
-        {
-            SelectUnits();
-        }
-        else if (Mouse.current.leftButton.wasPressedThisFrame)
+
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             // Player starts selecting units
             StartSelection();
@@ -52,18 +49,6 @@ public class UnitSelectionHandler : MonoBehaviour
         {
             // Player is selecting units
             UpdateSelectionArea();
-        }
-    }
-
-    bool MultiSelectEnabled()
-    {
-        if (Mouse.current.leftButton.wasPressedThisFrame && Keyboard.current.shiftKey.isPressed)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 
@@ -113,7 +98,7 @@ public class UnitSelectionHandler : MonoBehaviour
     {
         foreach (Unit unit in player.PlayerUnits)
         {
-            if (IsWithingSelectionArea(unit))
+            if (IsWithingSelectionArea(unit) && !IsUnitSelected(unit))
             {
                 selectedUnits.Add(unit);
                 unit.Select();
@@ -138,9 +123,25 @@ public class UnitSelectionHandler : MonoBehaviour
         }
     }
 
+    bool IsUnitSelected(Unit unit)
+    {
+        if (selectedUnits.Contains(unit))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     void StartSelection()
     {
-        DeselectAllUnits();
+        if (!Keyboard.current.shiftKey.isPressed)
+        {
+            // Only clear selection if SHIFT isn't pressed
+            DeselectAllUnits();
+        }
         DrawSelectionArea();
     }
 
