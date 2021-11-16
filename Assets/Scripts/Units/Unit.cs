@@ -8,7 +8,10 @@ public class Unit : NetworkBehaviour
 {
     [SerializeField] UnityEvent onSelected;
     [SerializeField] UnityEvent onDeselected;
+    [SerializeField] bool isTargetable = true;
     UnitMovement unitMovement;
+    
+    public bool IsTargetable { get { return isTargetable; } }
 
     public static event Action<Unit> ServerOnUnitSpawned;
     public static event Action<Unit> ServerOnUnitDespawned;

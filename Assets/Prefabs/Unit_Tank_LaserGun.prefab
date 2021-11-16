@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 1907663205243162310}
   - component: {fileID: 81055579954359370}
   - component: {fileID: 3268448714541513972}
+  - component: {fileID: -4012536271705959710}
   m_Layer: 0
   m_Name: Unit_Tank_LaserGun
   m_TagString: Untagged
@@ -275,6 +276,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isTargetable: 1
+--- !u!114 &-4012536271705959710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4705554653596921031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c8fbf9c3911dd4d9322cc8fca997db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetableLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  targetUnit: {fileID: 0}
 --- !u!1001 &4705554652760446201
 PrefabInstance:
   m_ObjectHideFlags: 0
