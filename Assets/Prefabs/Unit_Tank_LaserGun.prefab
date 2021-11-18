@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2689128627161259870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3625896709603094200}
+  m_Layer: 0
+  m_Name: Aim_At_Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3625896709603094200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2689128627161259870}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4705554653596921028}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2705271542105276012
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,6 +129,7 @@ GameObject:
   - component: {fileID: 81055579954359370}
   - component: {fileID: 3268448714541513972}
   - component: {fileID: -4012536271705959710}
+  - component: {fileID: 1564445789659853455}
   m_Layer: 0
   m_Name: Unit_Tank_LaserGun
   m_TagString: Untagged
@@ -119,6 +150,7 @@ Transform:
   m_Children:
   - {fileID: 5100261139644969746}
   - {fileID: 6612301251579825895}
+  - {fileID: 3625896709603094200}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -246,6 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  isTargetable: 1
   onSelected:
     m_PersistentCalls:
       m_Calls:
@@ -276,7 +309,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isTargetable: 1
 --- !u!114 &-4012536271705959710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +325,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   targetUnit: {fileID: 0}
+--- !u!114 &1564445789659853455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4705554653596921031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b48825499621ca438a0550a5122afae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimAtPoint: {fileID: 3625896709603094200}
 --- !u!1001 &4705554652760446201
 PrefabInstance:
   m_ObjectHideFlags: 0

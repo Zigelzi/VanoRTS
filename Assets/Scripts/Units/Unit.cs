@@ -6,10 +6,12 @@ using UnityEngine.Events;
 using Mirror;
 public class Unit : NetworkBehaviour
 {
+    [SerializeField] bool isTargetable = true;
     [SerializeField] UnityEvent onSelected;
     [SerializeField] UnityEvent onDeselected;
-    [SerializeField] bool isTargetable = true;
+
     UnitMovement unitMovement;
+    UnitTargeting unitTargeting;
     
     public bool IsTargetable { get { return isTargetable; } }
 
@@ -61,6 +63,11 @@ public class Unit : NetworkBehaviour
     public UnitMovement GetUnitMovement()
     {
         return unitMovement;
+    }
+
+    public UnitTargeting GetUnitTargeting()
+    {
+        return unitTargeting;
     }
 
     [Client]

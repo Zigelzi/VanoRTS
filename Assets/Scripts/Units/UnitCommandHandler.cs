@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class UnitCommandHandler : MonoBehaviour
 {
+    [SerializeField] LayerMask unitClickLayer;
+    
     Camera mainCamera;
     UnitSelectionHandler unitSelectionHandler;
 
@@ -18,24 +20,56 @@ public class UnitCommandHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleMovementCommand();
+        HandleMouseRightClick();
     }
 
-    void HandleMovementCommand()
+    void HandleMouseRightClick()
     {
         if (Mouse.current.rightButton.wasPressedThisFrame)
         {
-            Ray destination = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            TryMove(destination);
+            Ray clickedPosition = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+            TargetOrMove(clickedPosition);
+            TryMove(clickedPosition);
         }
     }
 
-    void TryMove(Ray destination)
+    void TargetOrMove(Ray clickedPosition)
+    {
+        RaycastHit rayHit;
+        Targetable target;
+        if (Physics.Raycast(clickedPosition, out rayHit, Mathf.Infinity, unitClickLayer))
+        {
+            if (rayHit.collider.TryGetComponent<Targetable>(out target)) {
+                if (target.hasAuthority)
+                {
+                    TryMove(clickedPosition);
+                    return;
+                }
+
+                TryTarget(target);
+                return;
+            }
+        }
+
+        TryMove(clickedPosition);
+    }
+
+    void TryMove(Ray clickedPosition)
     {
         List<Unit> selectedUnits = unitSelectionHandler.SelectedUnits;
         foreach(Unit unit in selectedUnits)
         {
-            unit.GetUnitMovement().CmdMove(destination);
+            unit.GetUnitMovement().CmdMove(clickedPosition);
+        }
+    }
+
+    void TryTarget(Targetable target)
+    {
+        List<Unit> selectedUnits = unitSelectionHandler.SelectedUnits;
+        foreach (Unit unit in selectedUnits)
+        {
+            unit.GetUnitTargeting().CmdSetTarget(target.gameObject);
         }
     }
 }

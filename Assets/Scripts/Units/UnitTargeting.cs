@@ -2,53 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Mirror;
 
-public class UnitTargeting : MonoBehaviour
+public class UnitTargeting : NetworkBehaviour
 {
-    [SerializeField] LayerMask targetableLayer = new LayerMask();
-    [SerializeField] Unit targetUnit;
-    Camera mainCamera;
-    // Start is called before the first frame update
-    void Start()
-    {
-        mainCamera = Camera.main;
-    }
+    [SerializeField] Targetable target; 
 
-    // Update is called once per frame
-    void Update()
+    #region Server
+    [Command]
+    public void CmdSetTarget(GameObject targetGameObject)
     {
-        HandleTargeting();
-    }
+        Targetable newTarget;
 
-    void HandleTargeting()
-    {
-        if (Mouse.current.rightButton.wasPressedThisFrame)
+        if (targetGameObject.TryGetComponent<Targetable>(out newTarget))
         {
-            TargetUnit();
+            target = newTarget;
         }
     }
 
-    void TargetUnit()
+    [Server]
+    public void ClearTarget()
     {
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit hit;
-        Unit clickedUnit;
-
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, targetableLayer))
-        {
-            clickedUnit = hit.transform.GetComponent<Unit>();
-
-            if (clickedUnit == null) { 
-                targetUnit = null;
-            }
-            else if (clickedUnit.IsTargetable && !clickedUnit.hasAuthority) {
-                targetUnit = clickedUnit;
-            }
-            else
-            {
-                targetUnit = null;
-            }
-            
-        }
+        target = null;
     }
+    #endregion
 }
