@@ -7,10 +7,11 @@ using Mirror;
 
 public class UnitMovement : NetworkBehaviour
 {
-    [SerializeField] [Range(0, 50f)] float turnSpeed = 20f;
-    Camera mainCamera;
+    [SerializeField] [Range(0, 30f)] float chaseRange = 10f;
     NavMeshAgent navAgent;
     UnitTargeting targeting;    
+
+    public float ChaseRange { get { return chaseRange; } }
 
     #region Server
 
@@ -27,7 +28,7 @@ public class UnitMovement : NetworkBehaviour
 
     void ChaseTarget()
     {
-        if (!IsInAttackRange())
+        if (!IsInChaseRange())
         {
             navAgent.SetDestination(targeting.Target.transform.position);
         }
@@ -42,13 +43,13 @@ public class UnitMovement : NetworkBehaviour
         }
     }
 
-    bool IsInAttackRange()
+    bool IsInChaseRange()
     {
         Targetable target = targeting.Target;
         float distanceFromTargetSquared = (target.transform.position - transform.position).sqrMagnitude;
-        float attackRangeSquared = targeting.AttackRange * targeting.AttackRange;
+        float chaseRangeSquared = chaseRange * chaseRange;
 
-        if (distanceFromTargetSquared <= attackRangeSquared)
+        if (distanceFromTargetSquared <= chaseRangeSquared)
         {
             return true;
         }
@@ -94,10 +95,6 @@ public class UnitMovement : NetworkBehaviour
             navAgent.ResetPath();
         }
     }
-
-    #endregion
-
-    #region Client
 
     #endregion
 }

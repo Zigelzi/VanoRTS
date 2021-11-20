@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2092775027416846526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4972724586580665531}
+  m_Layer: 0
+  m_Name: Projectile_Spawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4972724586580665531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092775027416846526}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.628, z: 2.103}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4705554653596921028}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2689128627161259870
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +158,7 @@ GameObject:
   - component: {fileID: 1907663205243162310}
   - component: {fileID: 81055579954359370}
   - component: {fileID: 3268448714541513972}
+  - component: {fileID: 2418877490313445829}
   - component: {fileID: -4012536271705959710}
   - component: {fileID: 1564445789659853455}
   m_Layer: 0
@@ -151,6 +182,7 @@ Transform:
   - {fileID: 5100261139644969746}
   - {fileID: 6612301251579825895}
   - {fileID: 3625896709603094200}
+  - {fileID: 4972724586580665531}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -264,6 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  chaseRange: 10
 --- !u!114 &3268448714541513972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +342,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2418877490313445829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4705554653596921031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a999a975657fd4ca0029db9ca0475a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  projectilePrefab: {fileID: 4277064395519953559, guid: cbac599a028dc9a4d9d6bf3b28c29a6a, type: 3}
+  projectileSpawnpoint: {fileID: 4972724586580665531}
 --- !u!114 &-4012536271705959710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,10 +370,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c8fbf9c3911dd4d9322cc8fca997db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetableLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  targetUnit: {fileID: 0}
+  syncMode: 0
+  syncInterval: 0.1
+  target: {fileID: 0}
 --- !u!114 &1564445789659853455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b48825499621ca438a0550a5122afae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   aimAtPoint: {fileID: 3625896709603094200}
 --- !u!1001 &4705554652760446201
 PrefabInstance:
