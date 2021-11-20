@@ -29,12 +29,11 @@ public class UnitCommandHandler : MonoBehaviour
         {
             Ray clickedPosition = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-            TargetOrMove(clickedPosition);
-            TryMove(clickedPosition);
+            TargetOrMoveTo(clickedPosition);
         }
     }
 
-    void TargetOrMove(Ray clickedPosition)
+    void TargetOrMoveTo(Ray clickedPosition)
     {
         RaycastHit rayHit;
         Targetable target;
@@ -43,15 +42,18 @@ public class UnitCommandHandler : MonoBehaviour
             if (rayHit.collider.TryGetComponent<Targetable>(out target)) {
                 if (target.hasAuthority)
                 {
+                    // Clicked friendly unit and unit should only move to the clicked position
                     TryMove(clickedPosition);
                     return;
                 }
 
+                // Clicked enemy unit and unit should target it
                 TryTarget(target);
                 return;
             }
         }
 
+        // Clicked ground and unit should only move to the clicked position
         TryMove(clickedPosition);
     }
 
