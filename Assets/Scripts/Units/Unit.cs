@@ -43,6 +43,7 @@ public class Unit : NetworkBehaviour
         base.OnStartClient();  
 
         unitMovement = GetComponent<UnitMovement>();
+        unitTargeting = GetComponent<UnitTargeting>();
 
         if (isClientOnly || hasAuthority)
         {
