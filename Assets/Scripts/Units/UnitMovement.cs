@@ -7,6 +7,7 @@ using Mirror;
 
 public class UnitMovement : NetworkBehaviour
 {
+    [SerializeField] [Range(0, 50f)] float turnSpeed = 20f;
     Camera mainCamera;
     NavMeshAgent navAgent;
     UnitTargeting targeting;    
@@ -33,10 +34,11 @@ public class UnitMovement : NetworkBehaviour
         else if (navAgent.hasPath)
         {
             navAgent.ResetPath();
+            
         }
         else
         {
-            return;
+            transform.LookAt(targeting.Target.transform.position);
         }
     }
 
