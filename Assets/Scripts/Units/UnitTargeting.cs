@@ -6,7 +6,12 @@ using Mirror;
 
 public class UnitTargeting : NetworkBehaviour
 {
-    [SerializeField] Targetable target; 
+    [SerializeField] Targetable target;
+    [SerializeField] [Range(0, 30f)] float attackRange = 10f;
+
+    public float AttackRange { get { return attackRange; } }
+
+    public Targetable Target { get { return target; } }
 
     #region Server
     [Command]

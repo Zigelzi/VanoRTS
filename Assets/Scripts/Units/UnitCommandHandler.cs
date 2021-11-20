@@ -20,7 +20,25 @@ public class UnitCommandHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HandleStop();
         HandleMouseRightClick();
+    }
+
+    void HandleStop()
+    {
+        if (Keyboard.current.sKey.wasPressedThisFrame)
+        {
+            StopMoving();
+        }
+    }
+
+    void StopMoving()
+    {
+        List<Unit> selectedUnits = unitSelectionHandler.SelectedUnits;
+        foreach (Unit unit in selectedUnits)
+        {
+            unit.GetUnitMovement().CmdStop();
+        }
     }
 
     void HandleMouseRightClick()

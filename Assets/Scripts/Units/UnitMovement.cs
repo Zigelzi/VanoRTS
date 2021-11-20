@@ -16,7 +16,44 @@ public class UnitMovement : NetworkBehaviour
     [ServerCallback]
     void Update()
     {
+        
+        if (targeting.Target != null)
+        {
+            ChaseTarget();
+        }
         ResetPathAtDestination();
+    }
+
+    void ChaseTarget()
+    {
+        if (!IsInAttackRange())
+        {
+            navAgent.SetDestination(targeting.Target.transform.position);
+        }
+        else if (navAgent.hasPath)
+        {
+            navAgent.ResetPath();
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    bool IsInAttackRange()
+    {
+        Targetable target = targeting.Target;
+        float distanceFromTargetSquared = (target.transform.position - transform.position).sqrMagnitude;
+        float attackRangeSquared = targeting.AttackRange * targeting.AttackRange;
+
+        if (distanceFromTargetSquared <= attackRangeSquared)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     void ResetPathAtDestination()
@@ -42,6 +79,17 @@ public class UnitMovement : NetworkBehaviour
         if (Physics.Raycast(destination, out RaycastHit rayHit, Mathf.Infinity))
         {
             navAgent.SetDestination(rayHit.point);
+        }
+    }    
+
+    [Command]
+    public void CmdStop()
+    {
+        targeting.ClearTarget();
+
+        if (navAgent.hasPath)
+        {
+            navAgent.ResetPath();
         }
     }
 
