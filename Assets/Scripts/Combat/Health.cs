@@ -7,9 +7,12 @@ using System;
 public class Health : NetworkBehaviour
 {
     [SerializeField] int maxHealth = 100;
-    [SerializeField] [SyncVar] int currentHealth;
+    [SerializeField] [SyncVar(hook = nameof(HandleHealthUpdate))] int currentHealth;
+
+    public int MaxHealth { get { return maxHealth; } }
 
     public static event Action ServerOnDie;
+    public event Action<int, int> ClientOnHealthUpdate;
     #region Server
     public override void OnStartServer()
     {
@@ -41,6 +44,12 @@ public class Health : NetworkBehaviour
     #endregion
 
     #region Client
+
+    void HandleHealthUpdate(int oldHealth, int newHealth)
+    {
+        Debug.Log($"Health updated for {gameObject.name}");
+        ClientOnHealthUpdate?.Invoke(newHealth, maxHealth);
+    }
 
     #endregion
 }
