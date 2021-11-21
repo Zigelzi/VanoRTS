@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 3268448714541513972}
   - component: {fileID: 2418877490313445829}
   - component: {fileID: -4012536271705959710}
+  - component: {fileID: 2622628336399225466}
   - component: {fileID: 1564445789659853455}
   m_Layer: 0
   m_Name: Unit_Tank_LaserGun
@@ -262,7 +263,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4705554653596921031}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.75, y: 2, z: 2.5}
@@ -358,6 +359,8 @@ MonoBehaviour:
   syncInterval: 0.1
   projectilePrefab: {fileID: 4277064395519953559, guid: cbac599a028dc9a4d9d6bf3b28c29a6a, type: 3}
   projectileSpawnpoint: {fileID: 4972724586580665531}
+  fireRate: 1
+  turnRate: 10
 --- !u!114 &-4012536271705959710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +376,22 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   target: {fileID: 0}
+--- !u!114 &2622628336399225466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4705554653596921031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c9eaae34cf491b45ab59904ae1d84a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  maxHealth: 50
+  currentHealth: 0
 --- !u!114 &1564445789659853455
 MonoBehaviour:
   m_ObjectHideFlags: 0
