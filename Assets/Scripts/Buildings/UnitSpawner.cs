@@ -4,15 +4,28 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Mirror;
 
+[RequireComponent(typeof(Health))]
 public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 {
     [SerializeField] GameObject unitPrefab;
+    
+    Health health;
     Vector3 unitSpawnPointPosition;
     #region Server
     public override void OnStartServer()
     {
         base.OnStartServer();
         unitSpawnPointPosition = transform.Find("SpawnPoint_Unit").position;
+
+        health = GetComponent<Health>();
+        health.ServerOnDie += ServerHandleDeath;
+    }
+
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+
+        health.ServerOnDie -= ServerHandleDeath;
     }
 
     [Command]
@@ -23,6 +36,12 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
         NetworkServer.Spawn(spawnedUnit, connectionToClient);
     }
 
+    [Server]
+    void ServerHandleDeath()
+    {
+        NetworkServer.Destroy(gameObject);
+        // TODO: Game should end when main base is destroyed
+    }
 
     #endregion
 

@@ -11,8 +11,9 @@ public class Health : NetworkBehaviour
 
     public int MaxHealth { get { return maxHealth; } }
 
-    public static event Action ServerOnDie;
+    public event Action ServerOnDie;
     public event Action<int, int> ClientOnHealthUpdate;
+
     #region Server
     public override void OnStartServer()
     {
@@ -38,7 +39,6 @@ public class Health : NetworkBehaviour
     [Server]
     void Die()
     {
-        NetworkServer.Destroy(gameObject);
         ServerOnDie?.Invoke();
     }
     #endregion

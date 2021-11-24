@@ -58,11 +58,11 @@ public class RtsNetworkPlayer : NetworkBehaviour
     #endregion
 
     #region Client
-    public override void OnStartClient()
+    public override void OnStartAuthority()
     {
-        base.OnStartClient();
+        base.OnStartAuthority();
 
-        if (isClientOnly)
+        if (NetworkServer.active)
         {
             Unit.AuthorityOnUnitSpawned += AuthorityHandleUnitSpawned;
             Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
@@ -73,7 +73,7 @@ public class RtsNetworkPlayer : NetworkBehaviour
     {
         base.OnStopClient();
 
-        if (isClientOnly)
+        if (isClientOnly || hasAuthority)
         {
             Unit.AuthorityOnUnitSpawned -= AuthorityHandleUnitSpawned;
             Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
@@ -82,14 +82,11 @@ public class RtsNetworkPlayer : NetworkBehaviour
 
     void AuthorityHandleUnitSpawned(Unit unit)
     { 
-        if (!hasAuthority) { return; }
-
         playerUnits.Add(unit);
     }
 
     void AuthorityHandleUnitDespawned(Unit unit)
     {
-        if (!hasAuthority) { return; }
         playerUnits.Remove(unit);
     }
     #endregion
