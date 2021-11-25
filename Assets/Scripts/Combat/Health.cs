@@ -47,7 +47,6 @@ public class Health : NetworkBehaviour
 
     void HandleHealthUpdate(int oldHealth, int newHealth)
     {
-        Debug.Log($"Health updated for {gameObject.name}");
         ClientOnHealthUpdate?.Invoke(newHealth, maxHealth);
     }
 

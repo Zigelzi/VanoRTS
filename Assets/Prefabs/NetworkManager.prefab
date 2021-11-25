@@ -63,7 +63,9 @@ MonoBehaviour:
   - {fileID: 4705554653596921031, guid: 5eb823fb5dd2d7d4fa2b0e71794827e1, type: 3}
   - {fileID: 8272412309521377035, guid: 1f74a5c0d2b16a34db6c1ee840f2a094, type: 3}
   - {fileID: 4277064395519953559, guid: cbac599a028dc9a4d9d6bf3b28c29a6a, type: 3}
+  - {fileID: 4761735311249623164, guid: 72a8c3bc520495541926a86d138ead51, type: 3}
   playerBase: {fileID: 8272412309521377035, guid: 1f74a5c0d2b16a34db6c1ee840f2a094, type: 3}
+  gameManagerPrefab: {fileID: 4761735311249623165, guid: 72a8c3bc520495541926a86d138ead51, type: 3}
 --- !u!114 &5305654138940634033
 MonoBehaviour:
   m_ObjectHideFlags: 0
