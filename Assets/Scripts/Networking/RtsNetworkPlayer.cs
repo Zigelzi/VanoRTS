@@ -62,11 +62,12 @@ public class RtsNetworkPlayer : NetworkBehaviour
     {
         base.OnStartAuthority();
 
-        if (NetworkServer.active)
-        {
-            Unit.AuthorityOnUnitSpawned += AuthorityHandleUnitSpawned;
-            Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
-        }
+        
+        // If we're server, we're already subsribed for these events OnStartServer
+        if (NetworkServer.active) { return; }
+        
+        Unit.AuthorityOnUnitSpawned += AuthorityHandleUnitSpawned;
+        Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
     }
 
     public override void OnStopClient()

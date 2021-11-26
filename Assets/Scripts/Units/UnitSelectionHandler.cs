@@ -204,7 +204,7 @@ public class UnitSelectionHandler : MonoBehaviour
     {
         if (hit.collider.TryGetComponent<Unit>(out Unit hitUnit)) {
             if (!hitUnit.hasAuthority) { return; }
-            
+
             selectedUnits.Add(hitUnit);
             SelectAllUnits();
         }

@@ -52,7 +52,7 @@ public class Unit : NetworkBehaviour
     #region Client
     public override void OnStartAuthority()
     {
-        base.OnStartAuthority();  
+        base.OnStartAuthority();
 
         unitMovement = GetComponent<UnitMovement>();
         unitTargeting = GetComponent<UnitTargeting>();
