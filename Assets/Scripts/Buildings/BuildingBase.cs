@@ -4,12 +4,12 @@ using UnityEngine;
 using System;
 using Mirror;
 
-public class Base : NetworkBehaviour
+public class BuildingBase : NetworkBehaviour
 {
     Health health;
 
-    public static event Action<Base> ServerOnBaseSpawned;
-    public static event Action<Base> ServerOnBaseDespawned;
+    public static event Action<BuildingBase> ServerOnBaseSpawned;
+    public static event Action<BuildingBase> ServerOnBaseDespawned;
 
     #region Server
     public override void OnStartServer()
@@ -39,7 +39,7 @@ public class Base : NetworkBehaviour
 
     #endregion
 
-    #region Clien
+    #region Client
 
     #endregion
 }

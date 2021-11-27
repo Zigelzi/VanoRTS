@@ -21,9 +21,9 @@ public class RtsNetworkManager : NetworkManager
         NetworkServer.Spawn(playerBaseInstance, conn);
     }
 
-    public override void OnServerChangeScene(string newSceneName)
+    public override void OnServerSceneChanged(string newSceneName)
     {
-        base.OnServerChangeScene(newSceneName);
+        base.OnServerSceneChanged(newSceneName);
 
         if (IsMapScene())
         {

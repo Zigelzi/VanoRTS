@@ -39,8 +39,9 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     [Server]
     void ServerHandleDeath()
     {
-        NetworkServer.Destroy(gameObject);
-        // TODO: Game should end when main base is destroyed
+        // Commented for time being since base is same object as spawner
+        //NetworkServer.Destroy(gameObject);
+        
     }
 
     #endregion

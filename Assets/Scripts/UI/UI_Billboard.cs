@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class UI_Billboard : MonoBehaviour
 {
-    Transform camera;
+    Transform mainCamera;
     void Start()
     {
-        camera = Camera.main.transform;
+        mainCamera = Camera.main.transform;
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.LookAt(transform.position + camera.forward);
+        transform.LookAt(transform.position + mainCamera.forward);
     }
 }

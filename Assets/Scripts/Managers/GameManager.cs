@@ -5,33 +5,33 @@ using Mirror;
 
 public class GameManager : NetworkBehaviour
 {
-    List<Base> playerBases = new List<Base>();
+    List<BuildingBase> playerBases = new List<BuildingBase>();
 
     #region Server
     public override void OnStartServer()
     {
         base.OnStartServer();
 
-        Base.ServerOnBaseSpawned += ServerHandleBaseSpawned;
-        Base.ServerOnBaseDespawned += ServerHandleBaseDespawned;
+        BuildingBase.ServerOnBaseSpawned += ServerHandleBaseSpawned;
+        BuildingBase.ServerOnBaseDespawned += ServerHandleBaseDespawned;
     }
 
     public override void OnStopServer()
     {
         base.OnStopServer();
 
-        Base.ServerOnBaseSpawned -= ServerHandleBaseSpawned;
-        Base.ServerOnBaseDespawned -= ServerHandleBaseDespawned;
+        BuildingBase.ServerOnBaseSpawned -= ServerHandleBaseSpawned;
+        BuildingBase.ServerOnBaseDespawned -= ServerHandleBaseDespawned;
     }
 
     [Server]
-    void ServerHandleBaseSpawned(Base spawnedBase)
+    void ServerHandleBaseSpawned(BuildingBase spawnedBase)
     {
         playerBases.Add(spawnedBase);
     }
 
     [Server]
-    void ServerHandleBaseDespawned(Base spawnedBase)
+    void ServerHandleBaseDespawned(BuildingBase spawnedBase)
     {
         playerBases.Remove(spawnedBase);
 
