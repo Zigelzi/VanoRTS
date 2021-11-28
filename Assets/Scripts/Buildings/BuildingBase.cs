@@ -10,6 +10,7 @@ public class BuildingBase : NetworkBehaviour
 
     public static event Action<BuildingBase> ServerOnBaseSpawned;
     public static event Action<BuildingBase> ServerOnBaseDespawned;
+    public static event Action<int> ServerOnPlayerDefeat;
 
     #region Server
     public override void OnStartServer()
@@ -35,6 +36,7 @@ public class BuildingBase : NetworkBehaviour
     void ServerHandleBaseDestroyed()
     {
         NetworkServer.Destroy(gameObject);
+        ServerOnPlayerDefeat?.Invoke(connectionToClient.connectionId);
     }
 
     #endregion

@@ -10,6 +10,27 @@ public class UnitTargeting : NetworkBehaviour
     public Targetable Target { get { return target; } }
 
     #region Server
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+
+        GameManager.ServerOnGameOver += ServerHandleGameOver;
+    }
+
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+
+        GameManager.ServerOnGameOver -= ServerHandleGameOver;
+    }
+
+    [Server]
+    void ServerHandleGameOver()
+    {
+        ClearTarget();
+    }
+
     [Command]
     public void CmdSetTarget(GameObject targetGameObject)
     {

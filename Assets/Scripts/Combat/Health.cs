@@ -19,7 +19,25 @@ public class Health : NetworkBehaviour
     {
         base.OnStartServer();
 
+        BuildingBase.ServerOnPlayerDefeat += ServerHandlePlayerDefeat;
+
         currentHealth = maxHealth;
+    }
+
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+
+        BuildingBase.ServerOnPlayerDefeat -= ServerHandlePlayerDefeat;
+    }
+
+    [Server]
+    void ServerHandlePlayerDefeat(int playerConnectionId)
+    {
+        if (playerConnectionId == connectionToClient.connectionId)
+        {
+            NetworkServer.Destroy(gameObject);
+        }
     }
 
     [Server]

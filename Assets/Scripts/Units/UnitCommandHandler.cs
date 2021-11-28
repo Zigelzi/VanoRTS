@@ -13,8 +13,15 @@ public class UnitCommandHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.ClientOnGameOver += ClientHandleGameOver;
+
         unitSelectionHandler = GetComponent<UnitSelectionHandler>();
         mainCamera = Camera.main;
+    }
+
+    void OnDestroy()
+    {
+        GameManager.ClientOnGameOver -= ClientHandleGameOver;
     }
 
     // Update is called once per frame
@@ -91,5 +98,15 @@ public class UnitCommandHandler : MonoBehaviour
         {
             unit.GetUnitTargeting().CmdSetTarget(target.gameObject);
         }
+    }
+
+    void ClientHandleGameOver(string winnerName)
+    {
+        DisableCommandHandling();
+    }
+
+    void DisableCommandHandling()
+    {
+        enabled = false;
     }
 }

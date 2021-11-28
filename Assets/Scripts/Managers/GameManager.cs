@@ -8,6 +8,8 @@ public class GameManager : NetworkBehaviour
 {
     List<BuildingBase> playerBases = new List<BuildingBase>();
 
+    public static event Action ServerOnGameOver;
+
     public static event Action<string> ClientOnGameOver;
 
     #region Server
@@ -43,8 +45,7 @@ public class GameManager : NetworkBehaviour
             int playerId = playerBases[0].connectionToClient.connectionId;
             string winnerName = $"Player {playerId}";
             RpcGameOver(winnerName);
-
-
+            ServerOnGameOver.Invoke();
         }
     }
 

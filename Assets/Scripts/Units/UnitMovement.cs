@@ -14,6 +14,22 @@ public class UnitMovement : NetworkBehaviour
     public float ChaseRange { get { return chaseRange; } }
 
     #region Server
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+
+        navAgent = GetComponent<NavMeshAgent>();
+        targeting = GetComponent<UnitTargeting>();
+
+        GameManager.ServerOnGameOver += ServerHandleGameOver;
+    }
+
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+
+        GameManager.ServerOnGameOver -= ServerHandleGameOver;
+    }
 
     [ServerCallback]
     void Update()
@@ -24,6 +40,12 @@ public class UnitMovement : NetworkBehaviour
             ChaseTarget();
         }
         ResetPathAtDestination();
+    }
+
+    [Server]
+    void ServerHandleGameOver()
+    {
+        navAgent.ResetPath();
     }
 
     void ChaseTarget()
@@ -43,6 +65,7 @@ public class UnitMovement : NetworkBehaviour
         }
     }
 
+    [Server]
     bool IsInChaseRange()
     {
         Targetable target = targeting.Target;
@@ -59,19 +82,13 @@ public class UnitMovement : NetworkBehaviour
         }
     }
 
+    [Server]
     void ResetPathAtDestination()
     {
         if (navAgent.hasPath && navAgent.remainingDistance < navAgent.stoppingDistance)
         {
             navAgent.ResetPath();
         }
-    }
-    public override void OnStartServer()
-    {
-        base.OnStartServer();
-
-        navAgent = GetComponent<NavMeshAgent>();
-        targeting = GetComponent<UnitTargeting>();
     }
 
     [Command]

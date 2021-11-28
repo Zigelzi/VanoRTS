@@ -21,11 +21,13 @@ public class UnitSelectionHandler : MonoBehaviour
         mainCamera = Camera.main;
 
         Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
+        GameManager.ClientOnGameOver += ClientHandlePlayerDefeat;
     }
 
     void OnDestroy()
     {
         Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
+        GameManager.ClientOnGameOver -= ClientHandlePlayerDefeat;
     }
 
     void Update()
@@ -216,6 +218,16 @@ public class UnitSelectionHandler : MonoBehaviour
         {
             unit.Select();
         }
+    }
+
+    void ClientHandlePlayerDefeat(string winnerName)
+    {
+        DisableSelectionHandling();
+    }
+
+    void DisableSelectionHandling() 
+    {
+        enabled = false;
     }
 
 }
