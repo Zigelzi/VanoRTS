@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System;
 
 public class GameManager : NetworkBehaviour
 {
     List<BuildingBase> playerBases = new List<BuildingBase>();
+
+    public static event Action<string> ClientOnGameOver;
 
     #region Server
     public override void OnStartServer()
@@ -31,15 +34,29 @@ public class GameManager : NetworkBehaviour
     }
 
     [Server]
-    void ServerHandleBaseDespawned(BuildingBase spawnedBase)
+    void ServerHandleBaseDespawned(BuildingBase despawnedBase)
     {
-        playerBases.Remove(spawnedBase);
+        playerBases.Remove(despawnedBase);
 
         if (playerBases.Count <= 1)
         {
-            Debug.Log("Game over!");
+            int playerId = playerBases[0].connectionToClient.connectionId;
+            string winnerName = $"Player {playerId}";
+            RpcGameOver(winnerName);
+
+
         }
     }
 
     #endregion
+
+    #region Client
+    [ClientRpc]
+    void RpcGameOver(string winnerName)
+    {
+        ClientOnGameOver?.Invoke(winnerName);
+    }
+
+    #endregion
 }
+
