@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class UnitCommandHandler : MonoBehaviour
 {
-    [SerializeField] LayerMask unitClickLayer;
+    [SerializeField] LayerMask clicableLayer;
     
     Camera mainCamera;
     UnitSelectionHandler unitSelectionHandler;
@@ -62,7 +62,7 @@ public class UnitCommandHandler : MonoBehaviour
     {
         RaycastHit rayHit;
         Targetable target;
-        if (Physics.Raycast(clickedPosition, out rayHit, Mathf.Infinity, unitClickLayer))
+        if (Physics.Raycast(clickedPosition, out rayHit, Mathf.Infinity, clicableLayer))
         {
             if (rayHit.collider.TryGetComponent<Targetable>(out target)) {
                 if (target.hasAuthority)

@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c27ba879b818834982165e740a5ced0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
+  unitLayermask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 1024
   selectionAreaElement: {fileID: 169819731487882474}
 --- !u!114 &446102238095947421
 MonoBehaviour:
@@ -61,9 +61,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c85caf8fb3cc404469dc63e2f8952840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitClickLayer:
+  clicableLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 5121
 --- !u!1 &2131948006485848051
 GameObject:
   m_ObjectHideFlags: 0

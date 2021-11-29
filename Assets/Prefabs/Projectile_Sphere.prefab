@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2663359138526334374}
   - component: {fileID: -498868056451066434}
   - component: {fileID: 1945735058982683096}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Projectile_Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,9 +129,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  damage: 10
   launchForce: 10
   lifetime: 5
+  damage: 10
 --- !u!54 &1945735058982683096
 Rigidbody:
   m_ObjectHideFlags: 0

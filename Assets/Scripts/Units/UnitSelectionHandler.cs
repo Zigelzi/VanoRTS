@@ -6,7 +6,7 @@ using Mirror;
 
 public class UnitSelectionHandler : MonoBehaviour
 {
-    [SerializeField] LayerMask layerMask = new LayerMask();
+    [SerializeField] LayerMask unitLayermask = new LayerMask();
     [SerializeField] RectTransform selectionAreaElement;
 
     Camera mainCamera;
@@ -102,7 +102,7 @@ public class UnitSelectionHandler : MonoBehaviour
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, unitLayermask))
         {
             AddUnitToSelection(hit);
         }
