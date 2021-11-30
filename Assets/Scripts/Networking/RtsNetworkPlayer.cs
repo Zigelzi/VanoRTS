@@ -6,7 +6,9 @@ using Mirror;
 public class RtsNetworkPlayer : NetworkBehaviour
 {
     [SerializeField] List<Unit> playerUnits = new List<Unit>();
+    [SerializeField] List<Building> playerBuildings = new List<Building>();
     public List<Unit> PlayerUnits { get { return playerUnits; } }
+    public List<Building> PlayerBuildings { get { return playerBuildings; } }
 
     #region Server
     public override void OnStartServer()
@@ -16,6 +18,9 @@ public class RtsNetworkPlayer : NetworkBehaviour
         // Subscribe on server for actions triggered by unit spawning or despawning
         Unit.ServerOnUnitSpawned += ServerHandleUnitSpawned;
         Unit.ServerOnUnitDespawned += ServerHandleUnitDespawned;
+
+        Building.ServerOnBuildingSpawned += ServerHandleBuildingSpawned;
+        Building.ServerOnBuildingDespawned += ServerHandleBuildingDespawned;
     }
 
     public override void OnStopServer()
@@ -25,11 +30,14 @@ public class RtsNetworkPlayer : NetworkBehaviour
         // Unsubscribe on server for actions triggered by unit spawning or despawning
         Unit.ServerOnUnitSpawned -= ServerHandleUnitSpawned;
         Unit.ServerOnUnitDespawned -= ServerHandleUnitDespawned;
+
+        Building.ServerOnBuildingSpawned -= ServerHandleBuildingSpawned;
+        Building.ServerOnBuildingDespawned -= ServerHandleBuildingDespawned;
     }
 
     void ServerHandleUnitSpawned(Unit unit)
     {
-        if (IsPlayers(unit))
+        if (IsPlayers(unit.connectionToClient.connectionId))
         {
             playerUnits.Add(unit);
         }
@@ -37,15 +45,31 @@ public class RtsNetworkPlayer : NetworkBehaviour
 
     void ServerHandleUnitDespawned(Unit unit)
     {
-        if (IsPlayers(unit))
+        if (IsPlayers(unit.connectionToClient.connectionId))
         {
             playerUnits.Remove(unit);
         }
     }
 
-    bool IsPlayers(Unit unit)
+    void ServerHandleBuildingSpawned(Building building)
     {
-        if (unit.connectionToClient.connectionId == connectionToClient.connectionId)
+        if (IsPlayers(building.connectionToClient.connectionId))
+        {
+            playerBuildings.Add(building);
+        }
+    }
+
+    void ServerHandleBuildingDespawned(Building building)
+    {
+        if (IsPlayers(building.connectionToClient.connectionId))
+        {
+            playerBuildings.Remove(building);
+        }
+    }
+
+    bool IsPlayers(int connectionId)
+    {
+        if (connectionId == connectionToClient.connectionId)
         {
             return true;
         }
@@ -68,6 +92,9 @@ public class RtsNetworkPlayer : NetworkBehaviour
         
         Unit.AuthorityOnUnitSpawned += AuthorityHandleUnitSpawned;
         Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
+
+        Building.AuthorityOnBuildingSpawned += AuthorityHandleBuildingSpawned;
+        Building.AuthorityOnBuildingDespawned += AuthorityHandleBuildingDespawned;
     }
 
     public override void OnStopClient()
@@ -78,6 +105,9 @@ public class RtsNetworkPlayer : NetworkBehaviour
         {
             Unit.AuthorityOnUnitSpawned -= AuthorityHandleUnitSpawned;
             Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
+
+            Building.AuthorityOnBuildingSpawned -= AuthorityHandleBuildingSpawned;
+            Building.AuthorityOnBuildingDespawned -= AuthorityHandleBuildingDespawned;
         }
     }
 
@@ -89,6 +119,16 @@ public class RtsNetworkPlayer : NetworkBehaviour
     void AuthorityHandleUnitDespawned(Unit unit)
     {
         playerUnits.Remove(unit);
+    }
+
+    void AuthorityHandleBuildingSpawned(Building building)
+    {
+        playerBuildings.Add(building);
+    }
+
+    void AuthorityHandleBuildingDespawned(Building building)
+    {
+        playerBuildings.Remove(building);
     }
     #endregion
 }
