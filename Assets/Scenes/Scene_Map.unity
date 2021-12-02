@@ -715,7 +715,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 8.41e-43, y: 5.42e-43, z: 0, w: 5.926496e+10}
+  m_BoundingSphereOverride: {x: 6.8e-43, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -905,6 +905,10 @@ PrefabInstance:
     - target: {fileID: 3450595352635945281, guid: 2a499f57e0421cf4780b5e9aadecbad2, type: 3}
       propertyPath: m_Name
       value: UI_Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864307212373453153, guid: 2a499f57e0421cf4780b5e9aadecbad2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.95000076
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a499f57e0421cf4780b5e9aadecbad2, type: 3}
