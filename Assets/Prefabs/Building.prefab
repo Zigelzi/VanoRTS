@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4817195638664661561}
   - component: {fileID: 4817195638664661567}
   - component: {fileID: 4817195638664661562}
-  - component: {fileID: 4817195638664661563}
   m_Layer: 0
   m_Name: Building
   m_TagString: Untagged
@@ -52,7 +51,7 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   visible: 0
-  m_AssetId: 
+  m_AssetId: ea45c810bb66b5440913457c99fe0d3e
   hasSpawned: 0
 --- !u!65 &4817195638664661560
 BoxCollider:
@@ -100,6 +99,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   price: 100
   buildingId: -1
+  buildingPreview: {fileID: 0}
 --- !u!114 &4817195638664661562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,18 +116,6 @@ MonoBehaviour:
   syncInterval: 0.1
   maxHealth: 100
   currentHealth: 0
---- !u!114 &4817195638664661563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4817195638664661556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57f6b6a74d852af4a900f233b5faf1e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4817195639194160551
 PrefabInstance:
   m_ObjectHideFlags: 0

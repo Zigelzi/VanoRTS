@@ -64,6 +64,7 @@ MonoBehaviour:
   - {fileID: 4803489405845162924, guid: c9fe494b7e83eeb4789b92f1ecb3940d, type: 3}
   - {fileID: 4277064395519953559, guid: cbac599a028dc9a4d9d6bf3b28c29a6a, type: 3}
   - {fileID: 4761735311249623164, guid: 72a8c3bc520495541926a86d138ead51, type: 3}
+  - {fileID: 4803489405845162924, guid: 57b41cc7d93cac2498aa2399baf3d1cf, type: 3}
   playerBase: {fileID: 4803489405845162924, guid: c9fe494b7e83eeb4789b92f1ecb3940d, type: 3}
   gameManagerPrefab: {fileID: 4761735311249623165, guid: 72a8c3bc520495541926a86d138ead51, type: 3}
 --- !u!114 &5305654138940634033

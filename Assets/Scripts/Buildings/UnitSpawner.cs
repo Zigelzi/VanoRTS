@@ -8,14 +8,13 @@ using Mirror;
 public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 {
     [SerializeField] GameObject unitPrefab;
-    
+    [SerializeField] Transform unitSpawnPointPosition;
     Health health;
-    Vector3 unitSpawnPointPosition;
+    
     #region Server
     public override void OnStartServer()
     {
         base.OnStartServer();
-        unitSpawnPointPosition = transform.Find("SpawnPoint_Unit").position;
 
         health = GetComponent<Health>();
         health.ServerOnDie += ServerHandleDeath;
@@ -32,7 +31,7 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     void CmdSpawnUnit()
     {
 
-        GameObject spawnedUnit = Instantiate(unitPrefab, unitSpawnPointPosition, Quaternion.identity);
+        GameObject spawnedUnit = Instantiate(unitPrefab, unitSpawnPointPosition.position, Quaternion.identity);
         NetworkServer.Spawn(spawnedUnit, connectionToClient);
     }
 
