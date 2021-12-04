@@ -19,8 +19,6 @@ public class MenuButton : MonoBehaviour
 
     public void LeaveGame()
     {
-        Debug.Log($"NetworkServer.active: {NetworkServer.active}");
-        Debug.Log($"NetworkClient.isConnected: {NetworkClient.isConnected}");
         if (NetworkServer.active && NetworkClient.isConnected)
         {
             NetworkManager.singleton.StopHost();

@@ -35,7 +35,6 @@ public class UI_Gold : MonoBehaviour
 
     void SetCurrentGold(int newGoldValue)
     {
-        Debug.Log("Setcurrentgold ran");
         goldText.text = newGoldValue.ToString();
     }
 }

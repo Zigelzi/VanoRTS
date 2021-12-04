@@ -35,7 +35,6 @@ public class BuildingBase : NetworkBehaviour
     [Server]
     void ServerHandleBaseDestroyed()
     {
-        NetworkServer.Destroy(gameObject);
         ServerOnPlayerDefeat?.Invoke(connectionToClient.connectionId);
     }
 

@@ -98,6 +98,8 @@ public class RtsNetworkPlayer : NetworkBehaviour
     {
         GameObject selectedBuilding = FindBuilding(buildingId);
 
+        if (selectedBuilding == null) { return; }
+
         // TODO: Check that there isn't other buildings in the area already
         GameObject builtBuilding = Instantiate(selectedBuilding, position, Quaternion.identity);
         NetworkServer.Spawn(builtBuilding, connectionToClient);

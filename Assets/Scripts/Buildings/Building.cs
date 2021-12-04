@@ -11,6 +11,8 @@ public class Building : NetworkBehaviour
     [SerializeField] int buildingId = -1;
     [SerializeField] GameObject buildingPreview;
 
+    Health health;
+
     public int BuildingId { get { return buildingId; } }
     public Sprite Icon { get { return icon; } }
     public int Price { get { return price; } }
@@ -28,6 +30,8 @@ public class Building : NetworkBehaviour
     {
         base.OnStartServer();
 
+        health = GetComponent<Health>();
+        health.ServerOnDie += ServerHandleBuildingDestroyed;
         ServerOnBuildingSpawned?.Invoke(this);
     }
 
@@ -35,7 +39,14 @@ public class Building : NetworkBehaviour
     {
         base.OnStartServer();
 
+        health.ServerOnDie -= ServerHandleBuildingDestroyed;
+
         ServerOnBuildingDespawned?.Invoke(this);
+    }
+
+    void ServerHandleBuildingDestroyed()
+    {
+        NetworkServer.Destroy(gameObject);
     }
 
     #endregion

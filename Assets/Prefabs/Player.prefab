@@ -66,6 +66,7 @@ MonoBehaviour:
   syncInterval: 0.1
   buildings:
   - {fileID: 4803489405845162919, guid: 57b41cc7d93cac2498aa2399baf3d1cf, type: 3}
+  - {fileID: 6619351783461722401, guid: 5243bbed4cee5244d80ce8d86cf2f156, type: 3}
   playerUnits: []
   playerBuildings: []
 --- !u!114 &1353359280944583369
@@ -82,3 +83,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  startingGold: 100
+  currentGold: 0
