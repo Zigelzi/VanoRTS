@@ -37,7 +37,7 @@ public class RtsNetworkPlayer : NetworkBehaviour
 
     void ServerHandleUnitSpawned(Unit unit)
     {
-        if (IsPlayers(unit.connectionToClient.connectionId))
+        if (IsPlayers(unit))
         {
             playerUnits.Add(unit);
         }
@@ -45,7 +45,7 @@ public class RtsNetworkPlayer : NetworkBehaviour
 
     void ServerHandleUnitDespawned(Unit unit)
     {
-        if (IsPlayers(unit.connectionToClient.connectionId))
+        if (IsPlayers(unit))
         {
             playerUnits.Remove(unit);
         }
@@ -53,7 +53,7 @@ public class RtsNetworkPlayer : NetworkBehaviour
 
     void ServerHandleBuildingSpawned(Building building)
     {
-        if (IsPlayers(building.connectionToClient.connectionId))
+        if (IsPlayers(building))
         {
             playerBuildings.Add(building);
         }
@@ -61,15 +61,27 @@ public class RtsNetworkPlayer : NetworkBehaviour
 
     void ServerHandleBuildingDespawned(Building building)
     {
-        if (IsPlayers(building.connectionToClient.connectionId))
+        if (IsPlayers(building))
         {
             playerBuildings.Remove(building);
         }
     }
 
-    bool IsPlayers(int connectionId)
+    bool IsPlayers(Unit unit)
     {
-        if (connectionId == connectionToClient.connectionId)
+        if (unit.connectionToClient.connectionId == connectionToClient.connectionId)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool IsPlayers(Building building)
+    {
+        if (building.connectionToClient.connectionId == connectionToClient.connectionId)
         {
             return true;
         }
