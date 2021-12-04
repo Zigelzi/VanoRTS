@@ -46,7 +46,6 @@ public class UnitSelectionHandler : MonoBehaviour
 
     void HandleSelection()
     {
-
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             // Player starts selecting units

@@ -5,8 +5,10 @@ using Mirror;
 
 public class RtsNetworkPlayer : NetworkBehaviour
 {
+    [SerializeField] Building[] buildings = new Building[0];
     [SerializeField] List<Unit> playerUnits = new List<Unit>();
     [SerializeField] List<Building> playerBuildings = new List<Building>();
+
     public List<Unit> PlayerUnits { get { return playerUnits; } }
     public List<Building> PlayerBuildings { get { return playerBuildings; } }
 
@@ -89,6 +91,29 @@ public class RtsNetworkPlayer : NetworkBehaviour
         {
             return false;
         }
+    }
+
+    [Command]
+    public void CmdTryPlaceBuilding(int buildingId, Vector3 position)
+    {
+        GameObject selectedBuilding = FindBuilding(buildingId);
+
+        // TODO: Check that there isn't other buildings in the area already
+        GameObject builtBuilding = Instantiate(selectedBuilding, position, Quaternion.identity);
+        NetworkServer.Spawn(builtBuilding, connectionToClient);
+    }
+
+    GameObject FindBuilding(int buildingId)
+    {
+        foreach (Building searchedBuilding in buildings)
+        {
+            if (searchedBuilding.BuildingId == buildingId)
+            {
+                return searchedBuilding.gameObject;
+            }
+        }
+
+        return null;
     }
 
     #endregion

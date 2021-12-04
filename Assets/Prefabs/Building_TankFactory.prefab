@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &5339722937775121409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4803489405845162924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8938aba6d2e0ac4193ca8b41e0b8095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  unitPrefab: {fileID: 4705554653596921031, guid: 5eb823fb5dd2d7d4fa2b0e71794827e1, type: 3}
-  unitSpawnPointPosition: {fileID: 4555460801760496593}
---- !u!114 &5750814578609821497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4803489405845162924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b48825499621ca438a0550a5122afae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  aimAtPoint: {fileID: 8340098215922989795}
 --- !u!1 &1162355830999768087
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +60,37 @@ Transform:
   m_Father: {fileID: 4803489405845162917}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5339722937775121409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4803489405845162924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8938aba6d2e0ac4193ca8b41e0b8095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  unitPrefab: {fileID: 4705554653596921031, guid: 5eb823fb5dd2d7d4fa2b0e71794827e1, type: 3}
+  unitSpawnPointPosition: {fileID: 4555460801760496593}
+--- !u!114 &5750814578609821497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4803489405845162924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b48825499621ca438a0550a5122afae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  aimAtPoint: {fileID: 8340098215922989795}
 --- !u!1001 &32494704887841176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: icon
       value: 
       objectReference: {fileID: 21300000, guid: aee710ea339ccac4d9f09e24962360d8, type: 3}
+    - target: {fileID: 4817195638664661567, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
+      propertyPath: buildingId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661567, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: buildingPreview
       value: 

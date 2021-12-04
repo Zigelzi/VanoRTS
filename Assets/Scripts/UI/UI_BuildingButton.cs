@@ -7,7 +7,7 @@ using TMPro;
 using Mirror;
 using UnityEngine.InputSystem;
 
-public class UI_BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class UI_BuildingButton : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] Building building;
     [SerializeField] LayerMask floorMask = new LayerMask();
@@ -39,7 +39,11 @@ public class UI_BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
         }
         if (isPreviewing)
         {
+            if (buildingPreviewInstance == null) { return; }
+
             MoveBuildingPreview();
+            HandleBuildingConfirmation();
+            HandleBuildingCancel();
         }
     }
 
@@ -76,9 +80,37 @@ public class UI_BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
         else
         {
             buildingPreviewInstance.SetActive(false);
-        }
+        } 
+    }
 
-        
+    void HandleBuildingConfirmation()
+    {
+        if (Mouse.current.leftButton.wasReleasedThisFrame)
+        {
+            TryBuildToClickPosition();
+        }
+    }
+
+    void TryBuildToClickPosition()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, floorMask))
+        {
+            player.CmdTryPlaceBuilding(building.BuildingId, hit.point);
+
+            Destroy(buildingPreviewInstance);
+            isPreviewing = false;
+        }
+    }
+
+    void HandleBuildingCancel()
+    {
+        if (Mouse.current.rightButton.wasReleasedThisFrame || Keyboard.current.escapeKey.wasReleasedThisFrame)
+        {
+            Destroy(buildingPreviewInstance);
+            isPreviewing = false;
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -93,26 +125,6 @@ public class UI_BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
             isPreviewing = true;
         }
-        else if (eventData.button == PointerEventData.InputButton.Left && isPreviewing)
-        {
-            if (buildingPreviewInstance == null) { return; }
-
-            Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, floorMask))
-            {
-                // Place building
-                Debug.Log($"Built building to position {hit.point}");
-            }
-
-            Destroy(buildingPreviewInstance);
-
-            isPreviewing = false;
-        }
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        
     }
 
 }

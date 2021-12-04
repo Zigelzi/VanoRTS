@@ -11,6 +11,7 @@ public class Building : NetworkBehaviour
     [SerializeField] int buildingId = -1;
     [SerializeField] GameObject buildingPreview;
 
+    public int BuildingId { get { return buildingId; } }
     public Sprite Icon { get { return icon; } }
     public int Price { get { return price; } }
 
