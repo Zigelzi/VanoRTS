@@ -7,7 +7,7 @@ using System;
 public class PlayerBank : NetworkBehaviour
 {
     [SerializeField] int startingGold = 100;
-    [SerializeField] [SyncVar(hook = nameof(HandleGoldUpdate))] int currentGold = 0;
+    [SerializeField] [SyncVar(hook = nameof(ClientHandleGoldUpdate))] int currentGold = 0;
 
     public int StartingGold { get { return startingGold; } }
 
@@ -61,7 +61,7 @@ public class PlayerBank : NetworkBehaviour
     #endregion
 
     #region Client
-    void HandleGoldUpdate(int oldGoldValue, int newGoldValue)
+    void ClientHandleGoldUpdate(int oldGoldValue, int newGoldValue)
     {
         ClientOnGoldUpdate?.Invoke(newGoldValue);
     }

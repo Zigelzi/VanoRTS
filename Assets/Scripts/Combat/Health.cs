@@ -7,7 +7,7 @@ using System;
 public class Health : NetworkBehaviour
 {
     [SerializeField] int maxHealth = 100;
-    [SerializeField] [SyncVar(hook = nameof(HandleHealthUpdate))] int currentHealth;
+    [SerializeField] [SyncVar(hook = nameof(ClientHandleHealthUpdate))] int currentHealth;
 
     public int MaxHealth { get { return maxHealth; } }
 
@@ -63,7 +63,7 @@ public class Health : NetworkBehaviour
 
     #region Client
 
-    void HandleHealthUpdate(int oldHealth, int newHealth)
+    void ClientHandleHealthUpdate(int oldHealth, int newHealth)
     {
         ClientOnHealthUpdate?.Invoke(newHealth, maxHealth);
     }
