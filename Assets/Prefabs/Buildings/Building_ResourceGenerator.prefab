@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db870408c7a09654299c51bccb8a3c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  goldGenerationAmount: 10
+  goldGenerationInterval: 3
 --- !u!1 &8261971188813546729
 GameObject:
   m_ObjectHideFlags: 0

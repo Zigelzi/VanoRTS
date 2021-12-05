@@ -7,6 +7,7 @@ using Mirror;
 public class Unit : NetworkBehaviour
 {
     [SerializeField] bool isTargetable = true;
+    [SerializeField] int buildingCost = 30;
     [SerializeField] UnityEvent onSelected;
     [SerializeField] UnityEvent onDeselected;
 
@@ -15,6 +16,7 @@ public class Unit : NetworkBehaviour
     UnitTargeting unitTargeting;
     
     public bool IsTargetable { get { return isTargetable; } }
+    public int BuildingCost { get { return buildingCost; } }
 
     public static event Action<Unit> ServerOnUnitSpawned;
     public static event Action<Unit> ServerOnUnitDespawned;

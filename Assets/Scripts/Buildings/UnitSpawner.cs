@@ -9,14 +9,29 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 {
     [SerializeField] GameObject unitPrefab;
     [SerializeField] Transform unitSpawnPointPosition;
-    
+
+    RtsNetworkPlayer player;
+    PlayerBank bank;
+
     #region Server
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+
+        player = NetworkClient.connection.identity.GetComponent<RtsNetworkPlayer>();
+        bank = player.GetComponent<PlayerBank>();
+    }
+
     [Command]
     void CmdSpawnUnit()
     {
-
-        GameObject spawnedUnit = Instantiate(unitPrefab, unitSpawnPointPosition.position, Quaternion.identity);
-        NetworkServer.Spawn(spawnedUnit, connectionToClient);
+        Unit spawnedUnit = unitPrefab.GetComponent<Unit>();
+        if (bank.HasGold(spawnedUnit.BuildingCost))
+        {
+            bank.ConsumeGold(spawnedUnit.BuildingCost);
+            GameObject spawnedUnitInstance = Instantiate(unitPrefab, unitSpawnPointPosition.position, Quaternion.identity);
+            NetworkServer.Spawn(spawnedUnitInstance, connectionToClient);
+        }
     }
 
     #endregion
