@@ -7,7 +7,7 @@ using Mirror;
 public class UI_Gold : MonoBehaviour
 {
     TMP_Text goldText;
-    RtsNetworkBank bank;
+    PlayerBank bank;
     RtsNetworkPlayer player;
 
     // Start is called before the first frame update
@@ -21,7 +21,7 @@ public class UI_Gold : MonoBehaviour
         {
             player = NetworkClient.connection.identity.GetComponent<RtsNetworkPlayer>();
             
-            bank = player.GetComponent<RtsNetworkBank>();
+            bank = player.GetComponent<PlayerBank>();
             bank.ClientOnGoldUpdate += SetCurrentGold;
 
             SetCurrentGold(bank.StartingGold);

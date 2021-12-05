@@ -9,6 +9,8 @@ public class RtsNetworkPlayer : NetworkBehaviour
     [SerializeField] List<Unit> playerUnits = new List<Unit>();
     [SerializeField] List<Building> playerBuildings = new List<Building>();
 
+    private PlayerBank bank;
+
     public List<Unit> PlayerUnits { get { return playerUnits; } }
     public List<Building> PlayerBuildings { get { return playerBuildings; } }
 
@@ -16,6 +18,8 @@ public class RtsNetworkPlayer : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer();
+
+        bank = GetComponent<PlayerBank>();
 
         // Subscribe on server for actions triggered by unit spawning or despawning
         Unit.ServerOnUnitSpawned += ServerHandleUnitSpawned;
@@ -117,6 +121,8 @@ public class RtsNetworkPlayer : NetworkBehaviour
 
         return null;
     }
+
+
 
     #endregion
 

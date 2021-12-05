@@ -7,7 +7,7 @@ using UnityEngine;
 public class Building : NetworkBehaviour
 {
     [SerializeField] Sprite icon;
-    [SerializeField] int price = 100;
+    [SerializeField] int price = 50;
     [SerializeField] int buildingId = -1;
     [SerializeField] GameObject buildingPreview;
 
