@@ -8,6 +8,7 @@ public class ResourceGenerator : NetworkBehaviour
     [SerializeField] int goldGenerationAmount = 10;
     [SerializeField][Range(0, 60)] int goldGenerationInterval = 1;
 
+    bool generationEnabled;
     PlayerBank bank;
     RtsNetworkPlayer player;
 
@@ -16,6 +17,13 @@ public class ResourceGenerator : NetworkBehaviour
     {
         base.OnStartServer();
 
+        player = NetworkClient.connection.identity.GetComponent<RtsNetworkPlayer>();
+        bank = player.GetComponent<PlayerBank>();
+
+        GameManager.ServerOnGameOver += ServerHandleGameOver;
+
+        generationEnabled = true;
+
         StartCoroutine(GenerateResource());
     }
 
@@ -23,23 +31,27 @@ public class ResourceGenerator : NetworkBehaviour
     {
         base.OnStopServer();
 
+        GameManager.ServerOnGameOver -= ServerHandleGameOver;
+
         StopCoroutine(GenerateResource());
+
+        generationEnabled = false;
     }
 
-    void Update()
+    void ServerHandleGameOver()
     {
-        if (player == null)
-        {
-            player = NetworkClient.connection.identity.GetComponent<RtsNetworkPlayer>();
-            bank = player.GetComponent<PlayerBank>();
-        }
+        StopCoroutine(GenerateResource());
     }
 
     [Server]
     IEnumerator GenerateResource()
     {
-        bank.AddGold(goldGenerationAmount);
-        yield return new WaitForSeconds(goldGenerationInterval);
+        while (generationEnabled)
+        {
+            bank.AddGold(goldGenerationAmount);
+            yield return new WaitForSeconds(goldGenerationInterval);
+        }
+        
     }
     #endregion
 }
