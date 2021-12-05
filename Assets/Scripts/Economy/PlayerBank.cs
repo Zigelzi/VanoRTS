@@ -22,7 +22,7 @@ public class PlayerBank : NetworkBehaviour
     }
 
     [Server]
-    bool HasGold(int goldAmount)
+    public bool HasGold(int goldAmount)
     {
         if (currentGold - goldAmount >= 0)
         {

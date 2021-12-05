@@ -100,13 +100,18 @@ public class RtsNetworkPlayer : NetworkBehaviour
     [Command]
     public void CmdTryPlaceBuilding(int buildingId, Vector3 position)
     {
-        GameObject selectedBuilding = FindBuilding(buildingId);
+        GameObject selectedBuildingGameObject = FindBuilding(buildingId);
+        Building selectedBuilding = selectedBuildingGameObject.GetComponent<Building>();
 
-        if (selectedBuilding == null) { return; }
+        if (selectedBuildingGameObject == null) { return; }
 
         // TODO: Check that there isn't other buildings in the area already
-        GameObject builtBuilding = Instantiate(selectedBuilding, position, Quaternion.identity);
-        NetworkServer.Spawn(builtBuilding, connectionToClient);
+        if (bank.HasGold(selectedBuilding.Price))
+        {
+            bank.ConsumeGold(selectedBuilding.Price);
+            GameObject builtBuilding = Instantiate(selectedBuildingGameObject, position, Quaternion.identity);
+            NetworkServer.Spawn(builtBuilding, connectionToClient);
+        }
     }
 
     GameObject FindBuilding(int buildingId)
@@ -121,9 +126,6 @@ public class RtsNetworkPlayer : NetworkBehaviour
 
         return null;
     }
-
-
-
     #endregion
 
     #region Client
