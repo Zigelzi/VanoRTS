@@ -9,6 +9,8 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 {
     [SerializeField] GameObject unitPrefab;
     [SerializeField] Transform unitSpawnPointPosition;
+    [SerializeField] [Range(0, 10)] int maxQueueSize = 5;
+    [SerializeField] Queue<Unit> unitQueue = new Queue<Unit>();
 
     RtsNetworkPlayer player;
     PlayerBank bank;
@@ -22,16 +24,30 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
         bank = player.GetComponent<PlayerBank>();
     }
 
+    [Server]
+    void QueueUnit()
+    {
+        Unit queuedUnit = unitPrefab.GetComponent<Unit>();
+        if (unitQueue.Count <= maxQueueSize && bank.HasGold(queuedUnit.BuildingCost))
+        {
+            unitQueue.Enqueue(queuedUnit);
+            StartCoroutine(SpawnUnit(queuedUnit));
+        }
+    }
+
+    [Server]
+    IEnumerator SpawnUnit(Unit spawnedUnit)
+    {
+        yield return new WaitForSeconds(spawnedUnit.BuildingTime);
+        CmdSpawnUnit();
+    }
+
     [Command]
     void CmdSpawnUnit()
     {
-        Unit spawnedUnit = unitPrefab.GetComponent<Unit>();
-        if (bank.HasGold(spawnedUnit.BuildingCost))
-        {
-            bank.ConsumeGold(spawnedUnit.BuildingCost);
-            GameObject spawnedUnitInstance = Instantiate(unitPrefab, unitSpawnPointPosition.position, Quaternion.identity);
-            NetworkServer.Spawn(spawnedUnitInstance, connectionToClient);
-        }
+        GameObject spawnedUnitInstance = Instantiate(unitPrefab, unitSpawnPointPosition.position, Quaternion.identity);
+        NetworkServer.Spawn(spawnedUnitInstance, connectionToClient);
+        unitQueue.Dequeue();  
     }
 
     #endregion
@@ -43,7 +59,7 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            CmdSpawnUnit();
+            QueueUnit();
         }
     }
     #endregion

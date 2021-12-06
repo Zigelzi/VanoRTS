@@ -16,6 +16,7 @@ MonoBehaviour:
   syncInterval: 0.1
   unitPrefab: {fileID: 4705554653596921031, guid: 5eb823fb5dd2d7d4fa2b0e71794827e1, type: 3}
   unitSpawnPointPosition: {fileID: 6599784855084332561}
+  maxQueueSize: 5
 --- !u!1 &6162783986885988763
 GameObject:
   m_ObjectHideFlags: 0
@@ -6149,10 +6150,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3873288802857205113, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661556, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Name
       value: Building_TankFactory
@@ -6249,9 +6246,13 @@ PrefabInstance:
       propertyPath: buildingPreview
       value: 
       objectReference: {fileID: 2334859528069028410}
-    - target: {fileID: 6621510367252461449, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
+    - target: {fileID: 4911958104528474821, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621510367252461449, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6621510367252461449, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6268,6 +6269,10 @@ PrefabInstance:
     - target: {fileID: 8550909839985352494, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8974149977446962357, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4817195638664661563, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}

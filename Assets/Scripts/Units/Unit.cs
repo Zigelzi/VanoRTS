@@ -8,6 +8,7 @@ public class Unit : NetworkBehaviour
 {
     [SerializeField] bool isTargetable = true;
     [SerializeField] int buildingCost = 30;
+    [SerializeField] int buildingTime = 5;
     [SerializeField] UnityEvent onSelected;
     [SerializeField] UnityEvent onDeselected;
 
@@ -17,6 +18,7 @@ public class Unit : NetworkBehaviour
     
     public bool IsTargetable { get { return isTargetable; } }
     public int BuildingCost { get { return buildingCost; } }
+    public int BuildingTime { get { return buildingTime; } }
 
     public static event Action<Unit> ServerOnUnitSpawned;
     public static event Action<Unit> ServerOnUnitDespawned;
