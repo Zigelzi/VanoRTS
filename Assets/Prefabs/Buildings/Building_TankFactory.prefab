@@ -17,6 +17,8 @@ MonoBehaviour:
   unitPrefab: {fileID: 4705554653596921031, guid: 5eb823fb5dd2d7d4fa2b0e71794827e1, type: 3}
   unitSpawnPointPosition: {fileID: 6599784855084332561}
   maxQueueSize: 5
+  spawnMoveRange: 7
+  currentQueueSize: 0
 --- !u!1 &6162783986885988763
 GameObject:
   m_ObjectHideFlags: 0
@@ -6156,27 +6158,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661560, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Size.x
-      value: 6.0595436
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661560, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Size.y
-      value: 2.068159
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661560, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Size.z
-      value: 4.025187
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661560, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Center.x
-      value: -0.000000834465
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661560, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Center.y
-      value: 1.0305796
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661560, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Center.z
-      value: 0.00000071525574
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661562, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: maxHealth

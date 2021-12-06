@@ -122,27 +122,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661560, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Size.x
-      value: 2.0231788
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661560, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Size.y
-      value: 5.0455174
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661560, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Size.z
-      value: 2.0141966
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661560, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Center.x
-      value: 0.005621791
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661560, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Center.y
-      value: 2.5073197
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661560, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Center.z
-      value: -0.011268735
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817195638664661561, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
+      propertyPath: m_Center.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817195638664661561, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
+      propertyPath: m_Extents.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817195638664661561, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
+      propertyPath: m_Extents.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817195638664661561, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
+      propertyPath: m_Extents.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661562, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: maxHealth
@@ -212,6 +228,10 @@ PrefabInstance:
       propertyPath: buildingPreview
       value: 
       objectReference: {fileID: 4112581495676782780}
+    - target: {fileID: 6621510367252461449, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8172685883235246003, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
