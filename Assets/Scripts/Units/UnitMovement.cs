@@ -113,5 +113,13 @@ public class UnitMovement : NetworkBehaviour
         }
     }
 
+    [Server]
+    public void ServerMove(Vector3 destination)
+    {
+        targeting.ClearTarget();
+
+        navAgent.SetDestination(destination);
+    }
+
     #endregion
 }

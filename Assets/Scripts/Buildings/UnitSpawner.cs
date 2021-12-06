@@ -71,10 +71,12 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     [Server]
     void MoveSpawnedUnit(GameObject spawnedUnit)
     {
-        NavMeshAgent navAgent = spawnedUnit.GetComponent<NavMeshAgent>();
+        UnitMovement spawnedUnitMovement = spawnedUnit.GetComponent<UnitMovement>();
         Vector3 spawnOffset = UnityEngine.Random.insideUnitSphere * spawnMoveRange;
+        spawnOffset.y = spawnedUnit.transform.position.y; 
         Vector3 spawnDestination = spawnedUnit.transform.position + spawnOffset;
-        navAgent.SetDestination(spawnDestination);
+
+        spawnedUnitMovement.ServerMove(spawnDestination);
     }
 
     void ServerHandleQueueSizeUpdated(int oldQueueSize, int newQueueSize)
