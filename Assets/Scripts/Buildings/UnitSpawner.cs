@@ -19,11 +19,12 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     [SyncVar(hook = nameof(ServerHandleQueueSizeUpdated))]
     int currentQueueSize = 0;
 
+    bool isBuildingUnit = false;
     RtsNetworkPlayer player;
     PlayerBank bank;
 
     public event Action<int> ServerOnUnitQueueSizeUpdated;
-    public event Action<Unit> ServerOnUnitQueued;
+    public event Action<Unit> ServerOnUnitBuildingStarted;
 
     #region Server
     public override void OnStartServer()
@@ -44,15 +45,19 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
             unitQueue.Enqueue(queuedUnit);
 
             currentQueueSize = unitQueue.Count;
-            ServerOnUnitQueued?.Invoke(queuedUnit);
 
-            StartCoroutine(SpawnUnit(queuedUnit));
+            if (!isBuildingUnit)
+            {   
+                StartCoroutine(SpawnUnit(queuedUnit));
+                isBuildingUnit = true;
+            }
         }
     }
 
     [Server]
     IEnumerator SpawnUnit(Unit spawnedUnit)
     {
+        ServerOnUnitBuildingStarted?.Invoke(spawnedUnit);
         yield return new WaitForSeconds(spawnedUnit.BuildingTime);
         CmdSpawnUnit();
     }
@@ -60,12 +65,20 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     [Command]
     void CmdSpawnUnit()
     {
+        Unit nextUnitInQueue;
         GameObject spawnedUnitInstance = Instantiate(unitPrefab, unitSpawnPointPosition.position, Quaternion.identity);
         NetworkServer.Spawn(spawnedUnitInstance, connectionToClient);
         unitQueue.Dequeue();
         currentQueueSize = unitQueue.Count;
+        isBuildingUnit = false;
 
         MoveSpawnedUnit(spawnedUnitInstance);
+
+        if (unitQueue.Count > 0)
+        {
+            nextUnitInQueue = unitQueue.Peek();
+            StartCoroutine(SpawnUnit(nextUnitInQueue));
+        }
     }
 
     [Server]
