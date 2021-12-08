@@ -17,13 +17,12 @@ public class ResourceGenerator : NetworkBehaviour
     {
         base.OnStartServer();
 
-        player = NetworkClient.connection.identity.GetComponent<RtsNetworkPlayer>();
-        bank = player.GetComponent<PlayerBank>();
-
         GameManager.ServerOnGameOver += ServerHandleGameOver;
 
-        generationEnabled = true;
+        player = connectionToClient.identity.GetComponent<RtsNetworkPlayer>();
+        bank = player.GetComponent<PlayerBank>();
 
+        generationEnabled = true;
         StartCoroutine(GenerateResource());
     }
 
@@ -34,8 +33,8 @@ public class ResourceGenerator : NetworkBehaviour
         GameManager.ServerOnGameOver -= ServerHandleGameOver;
 
         StopCoroutine(GenerateResource());
-
         generationEnabled = false;
+
     }
 
     void ServerHandleGameOver()
@@ -53,5 +52,10 @@ public class ResourceGenerator : NetworkBehaviour
         }
         
     }
+    #endregion
+
+    #region Client
+
+
     #endregion
 }
