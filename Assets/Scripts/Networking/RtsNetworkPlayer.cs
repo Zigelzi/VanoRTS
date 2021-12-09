@@ -8,6 +8,7 @@ public class RtsNetworkPlayer : NetworkBehaviour
     [SerializeField] Building[] buildings = new Building[0];
     [SerializeField] List<Unit> playerUnits = new List<Unit>();
     [SerializeField] List<Building> playerBuildings = new List<Building>();
+    [SerializeField] LayerMask notBuildableLayer = new LayerMask();
 
     private PlayerBank bank;
 
@@ -106,11 +107,29 @@ public class RtsNetworkPlayer : NetworkBehaviour
         if (selectedBuildingGameObject == null) { return; }
 
         // TODO: Check that there isn't other buildings in the area already
-        if (bank.HasGold(selectedBuilding.Price))
+        if (bank.HasGold(selectedBuilding.Price) && IsPlaceablePosition(selectedBuilding, position))
         {
             bank.ConsumeGold(selectedBuilding.Price);
             GameObject builtBuilding = Instantiate(selectedBuildingGameObject, position, Quaternion.identity);
             NetworkServer.Spawn(builtBuilding, connectionToClient);
+        }
+    }
+
+    bool IsPlaceablePosition(Building building, Vector3 position)
+    {
+        BoxCollider buildingCollider = building.GetComponent<BoxCollider>();
+        Vector3 distanceToEdge = buildingCollider.size / 2;
+
+        if (!Physics.CheckBox(position + buildingCollider.center, 
+            distanceToEdge, 
+            Quaternion.identity, 
+            notBuildableLayer))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

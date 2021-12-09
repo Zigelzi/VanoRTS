@@ -69,6 +69,9 @@ MonoBehaviour:
   - {fileID: 6619351783461722401, guid: 5243bbed4cee5244d80ce8d86cf2f156, type: 3}
   playerUnits: []
   playerBuildings: []
+  notBuildableLayer:
+    serializedVersion: 2
+    m_Bits: 1281
 --- !u!114 &1353359280944583369
 MonoBehaviour:
   m_ObjectHideFlags: 0
