@@ -13,6 +13,11 @@ public class RtsNetworkManager : NetworkManager
     {
         base.OnServerAddPlayer(conn);
 
+        RtsNetworkPlayer player = conn.identity.GetComponent<RtsNetworkPlayer>();
+        Color playerColor = VanoUtilities.GenerateRandomColor();
+
+        player.SetPlayerColor(playerColor);
+
         GameObject playerBaseInstance = Instantiate(
             playerBase,
             conn.identity.transform.position, 

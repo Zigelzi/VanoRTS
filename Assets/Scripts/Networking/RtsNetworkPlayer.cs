@@ -6,12 +6,14 @@ using Mirror;
 public class RtsNetworkPlayer : NetworkBehaviour
 {
     [SerializeField] Building[] buildings = new Building[0];
+    [SerializeField] Color playerColor = new Color();
     [SerializeField] List<Unit> playerUnits = new List<Unit>();
     [SerializeField] List<Building> playerBuildings = new List<Building>();
     [SerializeField] LayerMask notBuildableLayer = new LayerMask();
 
     private PlayerBank bank;
 
+    public Color PlayerColor { get { return playerColor; } }
     public List<Unit> PlayerUnits { get { return playerUnits; } }
     public List<Building> PlayerBuildings { get { return playerBuildings; } }
 
@@ -106,7 +108,6 @@ public class RtsNetworkPlayer : NetworkBehaviour
 
         if (selectedBuildingGameObject == null) { return; }
 
-        // TODO: Check that there isn't other buildings in the area already
         if (bank.HasGold(selectedBuilding.Price) && IsPlaceablePosition(selectedBuilding, position))
         {
             bank.ConsumeGold(selectedBuilding.Price);
@@ -144,6 +145,12 @@ public class RtsNetworkPlayer : NetworkBehaviour
         }
 
         return null;
+    }
+
+    [Server]
+    public void SetPlayerColor(Color newPlayerColor)
+    {
+        playerColor = newPlayerColor;
     }
     #endregion
 

@@ -104,6 +104,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3805878169837887864, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
+      propertyPath: colorRenderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3805878169837887864, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
+      propertyPath: colorRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 702046893820325813}
     - target: {fileID: 823069750982916248, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Enabled
       value: 1

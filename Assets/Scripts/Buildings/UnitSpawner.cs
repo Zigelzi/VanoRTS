@@ -35,8 +35,8 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
         bank = player.GetComponent<PlayerBank>();
     }
 
-    [Server]
-    void QueueUnit()
+    [Command]
+    void CmdQueueUnit()
     {
         Unit queuedUnit = unitPrefab.GetComponent<Unit>();
         if (unitQueue.Count < maxQueueSize && bank.HasGold(queuedUnit.BuildingCost))
@@ -59,11 +59,11 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     {
         ServerOnUnitBuildingStarted?.Invoke(spawnedUnit);
         yield return new WaitForSeconds(spawnedUnit.BuildingTime);
-        CmdSpawnUnit();
+        SpawnUnit();
     }
 
-    [Command]
-    void CmdSpawnUnit()
+    [Server]
+    void SpawnUnit()
     {
         Unit nextUnitInQueue;
         GameObject spawnedUnitInstance = Instantiate(unitPrefab, unitSpawnPointPosition.position, Quaternion.identity);
@@ -106,7 +106,7 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            QueueUnit();
+            CmdQueueUnit();
         }
     }
     #endregion

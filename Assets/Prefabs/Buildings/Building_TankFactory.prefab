@@ -6144,6 +6144,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3805878169837887864, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
+      propertyPath: colorRenderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3805878169837887864, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
+      propertyPath: colorRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 5960936276406129557}
     - target: {fileID: 2311586436229782434, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Name
       value: BuildingPreview_TankFactory

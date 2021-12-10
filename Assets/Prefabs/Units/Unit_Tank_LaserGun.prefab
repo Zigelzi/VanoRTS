@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: -4012536271705959710}
   - component: {fileID: 2622628336399225466}
   - component: {fileID: 1564445789659853455}
+  - component: {fileID: 8841472734478808655}
   m_Layer: 10
   m_Name: Unit_Tank_LaserGun
   m_TagString: Untagged
@@ -298,6 +299,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   isTargetable: 1
+  buildingCost: 30
+  buildingTime: 5
   onSelected:
     m_PersistentCalls:
       m_Calls:
@@ -416,6 +419,22 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   aimAtPoint: {fileID: 3625896709603094200}
+--- !u!114 &8841472734478808655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4705554653596921031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d91c2e104245e54f868264d7b817899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  colorRenderers:
+  - {fileID: 6236615389541533821}
 --- !u!1001 &1245775548527702065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -603,5 +622,10 @@ PrefabInstance:
 --- !u!4 &5100261139644969746 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 769eea7e0a4f2b14eb45ba7f9cd1ed1e, type: 3}
+  m_PrefabInstance: {fileID: 4705554652760446201}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6236615389541533821 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 769eea7e0a4f2b14eb45ba7f9cd1ed1e, type: 3}
   m_PrefabInstance: {fileID: 4705554652760446201}
   m_PrefabAsset: {fileID: 0}
