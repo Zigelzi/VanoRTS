@@ -17,8 +17,8 @@ public class UI_BuildingQueue : MonoBehaviour
         unitSpawner = GetComponentInParent<UnitSpawner>();
         unitQueueText = GetComponentInChildren<TMP_Text>();
 
-        unitSpawner.ServerOnUnitQueueSizeUpdated += SetCurrentQueueText;
-        unitSpawner.ServerOnUnitBuildingStarted += StartBuildingTimer;
+        unitSpawner.ClientOnUnitQueueSizeUpdated += SetCurrentQueueText;
+        unitSpawner.ClientOnUnitBuildingStarted += StartBuildingTimer;
 
         unitQueueText.text = "0";
         timerImage.fillAmount = 0;
@@ -26,8 +26,8 @@ public class UI_BuildingQueue : MonoBehaviour
 
     void OnDestroy()
     {
-        unitSpawner.ServerOnUnitQueueSizeUpdated -= SetCurrentQueueText;
-        unitSpawner.ServerOnUnitBuildingStarted -= StartBuildingTimer;
+        unitSpawner.ClientOnUnitQueueSizeUpdated -= SetCurrentQueueText;
+        unitSpawner.ClientOnUnitBuildingStarted -= StartBuildingTimer;
     }
 
     void SetCurrentQueueText(int newQueueSize)

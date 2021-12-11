@@ -16,22 +16,24 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     [SerializeField] Queue<Unit> unitQueue = new Queue<Unit>();
 
     [SerializeField]
-    [SyncVar(hook = nameof(ServerHandleQueueSizeUpdated))]
+    [SyncVar(hook = nameof(ClientHandleQueueSizeUpdated))]
     int currentQueueSize = 0;
 
+    [SyncVar(hook = nameof(ClientHandleBuildingStarted))]
     bool isBuildingUnit = false;
+
     RtsNetworkPlayer player;
     PlayerBank bank;
 
-    public event Action<int> ServerOnUnitQueueSizeUpdated;
-    public event Action<Unit> ServerOnUnitBuildingStarted;
+    public event Action<int> ClientOnUnitQueueSizeUpdated;
+    public event Action<Unit> ClientOnUnitBuildingStarted;
 
     #region Server
     public override void OnStartServer()
     {
         base.OnStartServer();
 
-        player = NetworkClient.connection.identity.GetComponent<RtsNetworkPlayer>();
+        player = connectionToClient.identity.GetComponent<RtsNetworkPlayer>();
         bank = player.GetComponent<PlayerBank>();
     }
 
@@ -47,18 +49,17 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
             currentQueueSize = unitQueue.Count;
 
             if (!isBuildingUnit)
-            {   
-                StartCoroutine(SpawnUnit(queuedUnit));
-                isBuildingUnit = true;
+            {
+                StartCoroutine(StartBuildingUnit(queuedUnit));
             }
         }
     }
 
     [Server]
-    IEnumerator SpawnUnit(Unit spawnedUnit)
+    IEnumerator StartBuildingUnit(Unit builtUnit)
     {
-        ServerOnUnitBuildingStarted?.Invoke(spawnedUnit);
-        yield return new WaitForSeconds(spawnedUnit.BuildingTime);
+        isBuildingUnit = true;
+        yield return new WaitForSeconds(builtUnit.BuildingTime);
         SpawnUnit();
     }
 
@@ -77,7 +78,7 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
         if (unitQueue.Count > 0)
         {
             nextUnitInQueue = unitQueue.Peek();
-            StartCoroutine(SpawnUnit(nextUnitInQueue));
+            StartCoroutine(StartBuildingUnit(nextUnitInQueue));
         }
     }
 
@@ -92,9 +93,9 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
         spawnedUnitMovement.ServerMove(spawnDestination);
     }
 
-    void ServerHandleQueueSizeUpdated(int oldQueueSize, int newQueueSize)
+    void ClientHandleQueueSizeUpdated(int oldQueueSize, int newQueueSize)
     {
-        ServerOnUnitQueueSizeUpdated?.Invoke(newQueueSize);
+        ClientOnUnitQueueSizeUpdated?.Invoke(newQueueSize);
     }
 
     #endregion
@@ -107,6 +108,16 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             CmdQueueUnit();
+        }
+    }
+
+    void ClientHandleBuildingStarted(bool oldBuildingState, bool newBuildingState)
+    {
+        Unit builtUnit = unitPrefab.GetComponent<Unit>();
+        Debug.Log(newBuildingState);
+        if (newBuildingState)
+        {
+            ClientOnUnitBuildingStarted?.Invoke(builtUnit);
         }
     }
     #endregion
