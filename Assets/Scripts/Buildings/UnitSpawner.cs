@@ -92,12 +92,6 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 
         spawnedUnitMovement.ServerMove(spawnDestination);
     }
-
-    void ClientHandleQueueSizeUpdated(int oldQueueSize, int newQueueSize)
-    {
-        ClientOnUnitQueueSizeUpdated?.Invoke(newQueueSize);
-    }
-
     #endregion
 
     #region Client
@@ -111,10 +105,14 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
         }
     }
 
+    void ClientHandleQueueSizeUpdated(int oldQueueSize, int newQueueSize)
+    {
+        ClientOnUnitQueueSizeUpdated?.Invoke(newQueueSize);
+    }
+
     void ClientHandleBuildingStarted(bool oldBuildingState, bool newBuildingState)
     {
         Unit builtUnit = unitPrefab.GetComponent<Unit>();
-        Debug.Log(newBuildingState);
         if (newBuildingState)
         {
             ClientOnUnitBuildingStarted?.Invoke(builtUnit);
