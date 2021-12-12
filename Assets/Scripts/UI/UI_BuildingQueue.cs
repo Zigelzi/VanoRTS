@@ -44,12 +44,14 @@ public class UI_BuildingQueue : MonoBehaviour
     {
         if (timerImage == null) { return; }
 
+        Debug.Log("StartBuildingTimer triggered");
         StartCoroutine(BuildingCountdown(unit.BuildingTime));
     }
     
     IEnumerator BuildingCountdown(int buildingTime)
     {
         float currentBuildingTime = 0f;
+        timerImage.fillAmount = 0;
 
         while (currentBuildingTime <= buildingTime)
         {

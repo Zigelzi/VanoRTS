@@ -18,6 +18,7 @@ public class CameraController : NetworkBehaviour
 
     public override void OnStartAuthority()
     {
+        
         base.OnStartAuthority();
 
         cameraTransform = transform.Find("CineCamera").transform;
@@ -47,8 +48,6 @@ public class CameraController : NetworkBehaviour
 
     void UpdateCameraPosition()
     {
-        Vector3 currentPosition = cameraTransform.position;
-
         if (previousInput == Vector2.zero)
         {
             HandleMouseInput();
@@ -61,7 +60,6 @@ public class CameraController : NetworkBehaviour
 
     void HandleMouseInput()
     {
-        Vector3 cursorMovement = Vector3.zero;
         Vector3 cursorPosition = Mouse.current.position.ReadValue();
 
         if (MouseWithinBounds(cursorPosition))
@@ -115,8 +113,6 @@ public class CameraController : NetworkBehaviour
     {
         Vector3 cameraPosition = cameraTransform.position;
         cameraPosition += new Vector3(previousInput.x, 0f, previousInput.y) * panSpeed * Time.deltaTime;
-
-        Debug.Log(cameraPosition);
 
         cameraPosition = ClampCameraMovement(cameraPosition);
 
