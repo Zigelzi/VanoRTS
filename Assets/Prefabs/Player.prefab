@@ -175,7 +175,7 @@ MonoBehaviour:
   panSpeed: 30
   zoomSpeed: 20
   screenXLimits: {x: -55, y: 55}
-  screenYLimits: {x: -55, y: 55}
+  screenYLimits: {x: -75, y: 25}
 --- !u!1 &4417784031790542121
 GameObject:
   m_ObjectHideFlags: 0
