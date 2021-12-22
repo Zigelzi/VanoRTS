@@ -117,7 +117,6 @@ public class UI_BuildingButton : MonoBehaviour, IPointerDownHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left && !isPreviewing)
         {
-            Debug.Log("Pointerup");
             buildingPreviewInstance = Instantiate(building.BuildingPreview);
             buildingRendererInstance = buildingPreviewInstance.GetComponentInChildren<Renderer>();
 

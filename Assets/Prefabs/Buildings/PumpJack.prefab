@@ -10,12 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 518426217117059662}
   - component: {fileID: 518426217113983870}
+  - component: {fileID: 2502917827660489001}
   m_Layer: 0
   m_Name: Pumpjack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &518426217117059662
 Transform:
@@ -84,6 +85,22 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.28839767, y: -1.267192, z: -0.002302289}
     m_Extent: {x: 2.0676045, y: 2.5832467, z: 1.140801}
   m_DirtyAABB: 0
+--- !u!208 &2502917827660489001
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518426217117161070}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.068, y: 2.5830002, z: 1.141}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.28800002, y: -1.2670001, z: -0.002}
+  m_TimeToStationary: 0.5
 --- !u!1 &518426217117161072
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +116,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &518426217117059664
 Transform:
