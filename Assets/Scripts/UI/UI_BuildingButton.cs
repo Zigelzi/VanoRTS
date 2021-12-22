@@ -85,7 +85,7 @@ public class UI_BuildingButton : MonoBehaviour, IPointerDownHandler
 
     void HandleBuildingConfirmation()
     {
-        if (Mouse.current.leftButton.wasReleasedThisFrame)
+        if (Mouse.current.leftButton.wasReleasedThisFrame && isPreviewing)
         {
             TryBuildToClickPosition();
         }
@@ -95,9 +95,9 @@ public class UI_BuildingButton : MonoBehaviour, IPointerDownHandler
     {
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, floorMask))
+        if (Physics.Raycast(ray, out RaycastHit floorHit, Mathf.Infinity, floorMask))
         {
-            player.CmdTryPlaceBuilding(building.BuildingId, hit.point);
+            player.CmdTryPlaceBuilding(building.BuildingId, floorHit.point);
 
             Destroy(buildingPreviewInstance);
             isPreviewing = false;
@@ -117,6 +117,7 @@ public class UI_BuildingButton : MonoBehaviour, IPointerDownHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left && !isPreviewing)
         {
+            Debug.Log("Pointerup");
             buildingPreviewInstance = Instantiate(building.BuildingPreview);
             buildingRendererInstance = buildingPreviewInstance.GetComponentInChildren<Renderer>();
 

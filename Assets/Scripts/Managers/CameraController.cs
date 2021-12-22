@@ -11,7 +11,7 @@ public class CameraController : NetworkBehaviour
     [SerializeField] Vector2 screenXLimits = Vector2.zero;
     [SerializeField] Vector2 screenYLimits = Vector2.zero;
 
-    float panBorderThickness = 40f; // In px
+    float panBorderThickness = 10f; // In px
     Transform cameraTransform;
     Controls controls;
     Vector2 previousInput;

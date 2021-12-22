@@ -271,3 +271,6 @@ MonoBehaviour:
   floorMask:
     serializedVersion: 2
     m_Bits: 4096
+  uiMask:
+    serializedVersion: 2
+    m_Bits: 32

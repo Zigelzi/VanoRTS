@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 944dec76537bee64f9d193655b4dec04, type: 2}
 --- !u!1001 &5829472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -942,7 +942,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 7.6e-43, y: 1.551e-42, z: 0, w: -0.000000009373402}
+  m_BoundingSphereOverride: {x: 0, y: 7.595e-42, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1320,6 +1320,10 @@ PrefabInstance:
     - target: {fileID: 7170085732500950133, guid: 4d177571441b2f449857c91edfb8d07a, type: 3}
       propertyPath: m_Name
       value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 7170085732500950133, guid: 4d177571441b2f449857c91edfb8d07a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7170085732501377109, guid: 4d177571441b2f449857c91edfb8d07a, type: 3}
       propertyPath: m_RootOrder
