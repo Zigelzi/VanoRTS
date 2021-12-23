@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  unitPrefab: {fileID: 4192256838676946712, guid: 6caf71e95a0bbc44c92fa62a7cf04f2b, type: 3}
+  unitPrefab: {fileID: 9143228887039624565, guid: 68da4ec1eef3ee74e82512d84592187c, type: 3}
   unitSpawnPointPosition: {fileID: 6599784855084332561}
   maxQueueSize: 5
   spawnMoveRange: 7
@@ -33,14 +33,14 @@ PrefabInstance:
     - target: {fileID: -3805878169837887864, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: colorRenderers.Array.data[0]
       value: 
-      objectReference: {fileID: 5431784452095019024}
+      objectReference: {fileID: 3336575894130622832}
     - target: {fileID: -3805878169837887864, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: colorRenderers.Array.data[1]
       value: 
       objectReference: {fileID: 5688524260555089448}
     - target: {fileID: 2311586436229782434, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Name
-      value: BuildingPreview_TankFactory
+      value: BuildingPreview_CarWorkshop
       objectReference: {fileID: 0}
     - target: {fileID: 3530304141313923136, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_IsActive
@@ -56,15 +56,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4732187824876270172, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 7.2000003
+      value: 4.275
       objectReference: {fileID: 0}
     - target: {fileID: 4732187824876270172, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_LocalScale.z
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4732187824876270172, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.52
+      objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661556, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Name
-      value: Building_TankFactory
+      value: Building_CarWorkshop
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661560, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_Size.x
@@ -140,19 +144,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661566, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: m_AssetId
-      value: 57b41cc7d93cac2498aa2399baf3d1cf
+      value: 69223cffaca820041865edd104b95563
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661567, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: icon
       value: 
-      objectReference: {fileID: 21300000, guid: aee710ea339ccac4d9f09e24962360d8, type: 3}
+      objectReference: {fileID: 21300000, guid: 721bee6044ee60947ad28b2aee2a4dbe, type: 3}
     - target: {fileID: 4817195638664661567, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: price
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661567, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: buildingId
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4817195638664661567, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
       propertyPath: buildingPreview
@@ -218,65 +222,65 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 5657298959337007024, guid: ea45c810bb66b5440913457c99fe0d3e, type: 3}
   m_PrefabInstance: {fileID: 32494704887841176}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &8400950722799596267
+--- !u!1001 &1917850960556173992
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 8564050932186472118}
     m_Modifications:
-    - target: {fileID: 4609362759815554107, guid: 3bcad454bd4a8064aa957301eff10d26, type: 3}
-      propertyPath: m_Name
-      value: TankFactory
-      objectReference: {fileID: 0}
-    - target: {fileID: 4609362759816050715, guid: 3bcad454bd4a8064aa957301eff10d26, type: 3}
+    - target: {fileID: 3805670674068613432, guid: 695c8fdd03b8a1a4daae70c476976fec, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4609362759816050715, guid: 3bcad454bd4a8064aa957301eff10d26, type: 3}
+    - target: {fileID: 3805670674068613432, guid: 695c8fdd03b8a1a4daae70c476976fec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4609362759816050715, guid: 3bcad454bd4a8064aa957301eff10d26, type: 3}
+    - target: {fileID: 3805670674068613432, guid: 695c8fdd03b8a1a4daae70c476976fec, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4609362759816050715, guid: 3bcad454bd4a8064aa957301eff10d26, type: 3}
+    - target: {fileID: 3805670674068613432, guid: 695c8fdd03b8a1a4daae70c476976fec, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4609362759816050715, guid: 3bcad454bd4a8064aa957301eff10d26, type: 3}
-      propertyPath: m_LocalRotation.w
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4609362759816050715, guid: 3bcad454bd4a8064aa957301eff10d26, type: 3}
+    - target: {fileID: 3805670674068613432, guid: 695c8fdd03b8a1a4daae70c476976fec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805670674068613432, guid: 695c8fdd03b8a1a4daae70c476976fec, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4609362759816050715, guid: 3bcad454bd4a8064aa957301eff10d26, type: 3}
+    - target: {fileID: 3805670674068613432, guid: 695c8fdd03b8a1a4daae70c476976fec, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4609362759816050715, guid: 3bcad454bd4a8064aa957301eff10d26, type: 3}
+    - target: {fileID: 3805670674068613432, guid: 695c8fdd03b8a1a4daae70c476976fec, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4609362759816050715, guid: 3bcad454bd4a8064aa957301eff10d26, type: 3}
+    - target: {fileID: 3805670674068613432, guid: 695c8fdd03b8a1a4daae70c476976fec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4609362759816050715, guid: 3bcad454bd4a8064aa957301eff10d26, type: 3}
+    - target: {fileID: 3805670674068613432, guid: 695c8fdd03b8a1a4daae70c476976fec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4609362759816050715, guid: 3bcad454bd4a8064aa957301eff10d26, type: 3}
+    - target: {fileID: 3805670674068613432, guid: 695c8fdd03b8a1a4daae70c476976fec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3805670674068714776, guid: 695c8fdd03b8a1a4daae70c476976fec, type: 3}
+      propertyPath: m_Name
+      value: CarWorkshop
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3bcad454bd4a8064aa957301eff10d26, type: 3}
---- !u!23 &5431784452095019024 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 695c8fdd03b8a1a4daae70c476976fec, type: 3}
+--- !u!23 &3336575894130622832 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 4609362759813626619, guid: 3bcad454bd4a8064aa957301eff10d26, type: 3}
-  m_PrefabInstance: {fileID: 8400950722799596267}
+  m_CorrespondingSourceObject: {fileID: 3805670674066713560, guid: 695c8fdd03b8a1a4daae70c476976fec, type: 3}
+  m_PrefabInstance: {fileID: 1917850960556173992}
   m_PrefabAsset: {fileID: 0}

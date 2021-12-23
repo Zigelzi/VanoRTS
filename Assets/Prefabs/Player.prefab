@@ -136,6 +136,7 @@ MonoBehaviour:
   buildings:
   - {fileID: 4803489405845162919, guid: 57b41cc7d93cac2498aa2399baf3d1cf, type: 3}
   - {fileID: 6619351783461722401, guid: 5243bbed4cee5244d80ce8d86cf2f156, type: 3}
+  - {fileID: 4803489405845162919, guid: 69223cffaca820041865edd104b95563, type: 3}
   playerColor: {r: 0, g: 0, b: 1, a: 1}
   playerUnits: []
   playerBuildings: []
