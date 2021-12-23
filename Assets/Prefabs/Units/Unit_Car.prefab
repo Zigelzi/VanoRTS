@@ -23,6 +23,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2.43
       objectReference: {fileID: 0}
+    - target: {fileID: 2418877490313445829, guid: 5eb823fb5dd2d7d4fa2b0e71794827e1, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 7880586594827869663, guid: d84b177c0a080c04eabd4f612cd58375, type: 3}
     - target: {fileID: 2519985169905017381, guid: 5eb823fb5dd2d7d4fa2b0e71794827e1, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -86,6 +90,14 @@ PrefabInstance:
     - target: {fileID: 4705554653596921031, guid: 5eb823fb5dd2d7d4fa2b0e71794827e1, type: 3}
       propertyPath: m_Name
       value: Unit_Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 4972724586580665531, guid: 5eb823fb5dd2d7d4fa2b0e71794827e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.492
+      objectReference: {fileID: 0}
+    - target: {fileID: 4972724586580665531, guid: 5eb823fb5dd2d7d4fa2b0e71794827e1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.104
       objectReference: {fileID: 0}
     - target: {fileID: 8841472734478808655, guid: 5eb823fb5dd2d7d4fa2b0e71794827e1, type: 3}
       propertyPath: colorRenderers.Array.data[0]

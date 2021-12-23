@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: 6caf71e95a0bbc44c92fa62a7cf04f2b
       objectReference: {fileID: 0}
+    - target: {fileID: 2418877490313445829, guid: 5eb823fb5dd2d7d4fa2b0e71794827e1, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 7880586594827869663, guid: 0ab246e61a5b5b34d87c471d9381a92e, type: 3}
     - target: {fileID: 2519985169905017381, guid: 5eb823fb5dd2d7d4fa2b0e71794827e1, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

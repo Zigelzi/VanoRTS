@@ -44,7 +44,6 @@ public class UI_BuildingQueue : MonoBehaviour
     {
         if (timerImage == null) { return; }
 
-        Debug.Log("StartBuildingTimer triggered");
         StartCoroutine(BuildingCountdown(unit.BuildingTime));
     }
     
