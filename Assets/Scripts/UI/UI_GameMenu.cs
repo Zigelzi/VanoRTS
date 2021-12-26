@@ -1,5 +1,4 @@
-﻿using Mirror;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,20 +7,16 @@ using Mirror;
 public class UI_GameMenu : MonoBehaviour
 {
     [SerializeField] GameObject mainMenuPanel;
-    [SerializeField] GameObject joinGamePanel;
-    [SerializeField] GameObject gameLobbyPanel;
 
     void Start()
     {
         mainMenuPanel = transform.Find("MainMenu").gameObject;
-        joinGamePanel = transform.Find("JoinGame").gameObject;
-        gameLobbyPanel = transform.Find("GameLobby").gameObject;
     }
 
     public void HostGame()
     {
         mainMenuPanel.SetActive(false);
-
+        
         NetworkManager.singleton.StartHost();
     }
 
@@ -46,5 +41,7 @@ public class UI_GameMenu : MonoBehaviour
         {
             NetworkManager.singleton.StopClient();
         }
+
+        SceneManager.LoadScene(0);
     }
 }
