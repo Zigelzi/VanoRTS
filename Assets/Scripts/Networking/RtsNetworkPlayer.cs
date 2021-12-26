@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
@@ -13,9 +14,15 @@ public class RtsNetworkPlayer : NetworkBehaviour
 
     private PlayerBank bank;
 
+    [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
+    bool isPartyOwner = false;
+
+    public bool IsPartyOwner { get { return isPartyOwner; } }
     public Color PlayerColor { get { return playerColor; } }
     public List<Unit> PlayerUnits { get { return playerUnits; } }
     public List<Building> PlayerBuildings { get { return playerBuildings; } }
+
+    public static event Action<bool> AuthorityOnPartyOwnerUpdated;
 
     #region Server
     public override void OnStartServer()
@@ -116,6 +123,19 @@ public class RtsNetworkPlayer : NetworkBehaviour
         }
     }
 
+    GameObject FindBuilding(int buildingId)
+    {
+        foreach (Building searchedBuilding in buildings)
+        {
+            if (searchedBuilding.BuildingId == buildingId)
+            {
+                return searchedBuilding.gameObject;
+            }
+        }
+
+        return null;
+    }
+
     bool IsPlaceablePosition(Building building, Vector3 position)
     {
         BoxCollider buildingCollider = building.GetComponent<BoxCollider>();
@@ -134,17 +154,14 @@ public class RtsNetworkPlayer : NetworkBehaviour
         }
     }
 
-    GameObject FindBuilding(int buildingId)
+    [Command]
+    public void CmdStartGame()
     {
-        foreach (Building searchedBuilding in buildings)
+        RtsNetworkManager networkManager = (RtsNetworkManager)NetworkManager.singleton;
+        if (isPartyOwner)
         {
-            if (searchedBuilding.BuildingId == buildingId)
-            {
-                return searchedBuilding.gameObject;
-            }
+            networkManager.StartGame();
         }
-
-        return null;
     }
 
     [Server]
@@ -152,13 +169,19 @@ public class RtsNetworkPlayer : NetworkBehaviour
     {
         playerColor = newPlayerColor;
     }
+
+    [Server]
+    public void SetPartyOwner(bool partyOwnerState)
+    {
+        isPartyOwner = partyOwnerState;
+    }
+
     #endregion
 
     #region Client
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
-
         
         // If we're server, we're already subsribed for these events OnStartServer
         if (NetworkServer.active) { return; }
@@ -170,9 +193,27 @@ public class RtsNetworkPlayer : NetworkBehaviour
         Building.AuthorityOnBuildingDespawned += AuthorityHandleBuildingDespawned;
     }
 
+    public override void OnStartClient()
+    {
+        RtsNetworkManager networkManager = (RtsNetworkManager)NetworkManager.singleton;
+        base.OnStartClient();
+
+        if (NetworkServer.active) { return; }
+
+        networkManager.Players.Add(this);
+
+    }
+
     public override void OnStopClient()
     {
+        RtsNetworkManager networkManager = (RtsNetworkManager)NetworkManager.singleton;
+
         base.OnStopClient();
+
+        if (isClientOnly)
+        {
+            networkManager.Players.Remove(this);
+        }
 
         if (isClientOnly || hasAuthority)
         {
@@ -181,6 +222,14 @@ public class RtsNetworkPlayer : NetworkBehaviour
 
             Building.AuthorityOnBuildingSpawned -= AuthorityHandleBuildingSpawned;
             Building.AuthorityOnBuildingDespawned -= AuthorityHandleBuildingDespawned;
+        }
+    }
+
+    void AuthorityHandlePartyOwnerStateUpdated(bool oldState, bool newState)
+    {
+        if (hasAuthority)
+        {
+            AuthorityOnPartyOwnerUpdated?.Invoke(newState);
         }
     }
 

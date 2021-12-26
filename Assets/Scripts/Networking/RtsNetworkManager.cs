@@ -7,28 +7,68 @@ using System;
 
 public class RtsNetworkManager : NetworkManager
 {
-    [SerializeField] GameObject playerBase;
-    [SerializeField]GameManager gameManagerPrefab;
+    [SerializeField] GameManager gameManagerPrefab;
+    [SerializeField] GameObject playerBasePrefab;
+    [SerializeField] List<RtsNetworkPlayer> players = new List<RtsNetworkPlayer>();
+    bool isGameInProgress = false;
+    string mapName = "Scene_Map";
+
+    public List<RtsNetworkPlayer> Players { get { return players; } }
 
     public static event Action OnClientConnectToLobby;
     public static event Action OnClientDisconnectFromLobby;
 
     #region Server
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+
+        Players.Clear();
+
+        isGameInProgress = false;
+    }
+
+    public void StartGame()
+    {
+        if (players.Count >= 2)
+        {
+            isGameInProgress = true;
+            ServerChangeScene(mapName);
+        }
+    }
+
+    public override void OnServerConnect(NetworkConnection conn)
+    {
+        base.OnServerConnect(conn);
+
+        if (!isGameInProgress) { return; }
+
+        conn.Disconnect();
+    }
+
+    public override void OnServerDisconnect(NetworkConnection conn)
+    {
+        base.OnServerDisconnect(conn);
+
+        RtsNetworkPlayer disconnectedPlayer = conn.identity.GetComponent<RtsNetworkPlayer>();
+        players.Remove(disconnectedPlayer);
+    }
+
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         base.OnServerAddPlayer(conn);
 
         RtsNetworkPlayer player = conn.identity.GetComponent<RtsNetworkPlayer>();
-        Color playerColor = VanoUtilities.GenerateRandomColor();
+        players.Add(player);
 
+        Color playerColor = VanoUtilities.GenerateRandomColor();
         player.SetPlayerColor(playerColor);
 
-        //GameObject playerBaseInstance = Instantiate(
-        //    playerBase,
-        //    conn.identity.transform.position, 
-        //    conn.identity.transform.rotation);
-
-        //NetworkServer.Spawn(playerBaseInstance, conn);
+        if (players.Count == 1)
+        {
+            player.SetPartyOwner(true);
+        }
+        
     }
 
     public override void OnServerSceneChanged(string newSceneName)
@@ -39,12 +79,13 @@ public class RtsNetworkManager : NetworkManager
         {
             GameManager instantiatedGameManager =  Instantiate(gameManagerPrefab);
             NetworkServer.Spawn(instantiatedGameManager.gameObject);
+
+            SpawnPlayers();
         }
     }
 
     bool IsMapScene()
     {
-        string mapName = "Scene_Map";
         if (SceneManager.GetActiveScene().name.StartsWith(mapName))
         {
             return true;
@@ -52,6 +93,19 @@ public class RtsNetworkManager : NetworkManager
         else
         {
             return false;
+        }
+    }
+
+    void SpawnPlayers()
+    {
+        foreach (RtsNetworkPlayer player in players)
+        {
+            GameObject playerBaseInstance = Instantiate(
+            playerBasePrefab,
+            GetStartPosition().position,
+            Quaternion.identity);
+
+            NetworkServer.Spawn(playerBaseInstance, player.connectionToClient);
         }
     }
     #endregion
@@ -69,6 +123,13 @@ public class RtsNetworkManager : NetworkManager
         base.OnClientDisconnect(conn);
 
         OnClientDisconnectFromLobby?.Invoke();
+    }
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+
+        players.Clear();
     }
 
     #endregion

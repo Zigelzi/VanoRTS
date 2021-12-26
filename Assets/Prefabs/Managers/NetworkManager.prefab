@@ -68,8 +68,9 @@ MonoBehaviour:
   - {fileID: 4803489405845162924, guid: 69223cffaca820041865edd104b95563, type: 3}
   - {fileID: 9143228887039624565, guid: 68da4ec1eef3ee74e82512d84592187c, type: 3}
   - {fileID: 7880586594827869663, guid: d84b177c0a080c04eabd4f612cd58375, type: 3}
-  playerBase: {fileID: 4803489405845162924, guid: c9fe494b7e83eeb4789b92f1ecb3940d, type: 3}
   gameManagerPrefab: {fileID: 4761735311249623165, guid: 72a8c3bc520495541926a86d138ead51, type: 3}
+  playerBasePrefab: {fileID: 4803489405845162924, guid: c9fe494b7e83eeb4789b92f1ecb3940d, type: 3}
+  players: []
 --- !u!114 &5305654138940634033
 MonoBehaviour:
   m_ObjectHideFlags: 0
