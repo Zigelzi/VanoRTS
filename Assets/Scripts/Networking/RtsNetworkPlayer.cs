@@ -14,15 +14,20 @@ public class RtsNetworkPlayer : NetworkBehaviour
 
     private PlayerBank bank;
 
+    [SyncVar(hook = nameof(ClientHandlePlayerNameUpdated))]
+    string playerName;
+
     [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
     bool isPartyOwner = false;
 
     public bool IsPartyOwner { get { return isPartyOwner; } }
+    public string PlayerName { get { return playerName; } }
     public Color PlayerColor { get { return playerColor; } }
     public List<Unit> PlayerUnits { get { return playerUnits; } }
     public List<Building> PlayerBuildings { get { return playerBuildings; } }
 
     public static event Action<bool> AuthorityOnPartyOwnerUpdated;
+    public static event Action ClientOnPlayerInfoUpdated;
 
     #region Server
     public override void OnStartServer()
@@ -178,6 +183,12 @@ public class RtsNetworkPlayer : NetworkBehaviour
         isPartyOwner = partyOwnerState;
     }
 
+    [Server]
+    public void SetPlayerName(string newName)
+    {
+        playerName = newName;
+    }
+
     #endregion
 
     #region Client
@@ -212,6 +223,8 @@ public class RtsNetworkPlayer : NetworkBehaviour
         RtsNetworkManager networkManager = (RtsNetworkManager)NetworkManager.singleton;
 
         base.OnStopClient();
+
+        ClientOnPlayerInfoUpdated?.Invoke();
 
         if (isClientOnly)
         {
@@ -254,6 +267,11 @@ public class RtsNetworkPlayer : NetworkBehaviour
     void AuthorityHandleBuildingDespawned(Building building)
     {
         playerBuildings.Remove(building);
+    }
+
+    void ClientHandlePlayerNameUpdated(string oldName, string newName)
+    {
+        ClientOnPlayerInfoUpdated?.Invoke();
     }
     #endregion
 }

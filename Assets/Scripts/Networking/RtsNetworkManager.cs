@@ -61,6 +61,7 @@ public class RtsNetworkManager : NetworkManager
 
         Color playerColor = VanoUtilities.GenerateRandomColor();
         player.SetPlayerColor(playerColor);
+        player.SetPlayerName($"Player {players.Count}");
 
         if (players.Count == 1)
         {
