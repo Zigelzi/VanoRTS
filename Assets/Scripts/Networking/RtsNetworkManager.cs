@@ -15,8 +15,6 @@ public class RtsNetworkManager : NetworkManager
 
     public List<RtsNetworkPlayer> Players { get { return players; } }
 
-    public static event Action OnServerHostLeave;
-
     public static event Action OnClientConnectToLobby;
     public static event Action OnClientDisconnectFromLobby;
 
@@ -26,7 +24,6 @@ public class RtsNetworkManager : NetworkManager
         Players.Clear();
 
         isGameInProgress = false;
-        OnServerHostLeave?.Invoke();
     }
 
     public void StartGame()
