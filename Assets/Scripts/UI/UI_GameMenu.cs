@@ -10,7 +10,12 @@ public class UI_GameMenu : MonoBehaviour
 
     void Start()
     {
-        mainMenuPanel = transform.Find("MainMenu").gameObject;
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if (currentSceneIndex == 0)
+        {
+            mainMenuPanel = transform.Find("MainMenu").gameObject;
+        }
     }
 
     public void HostGame()

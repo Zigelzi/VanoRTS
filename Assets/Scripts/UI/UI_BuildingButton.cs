@@ -22,16 +22,12 @@ public class UI_BuildingButton : MonoBehaviour, IPointerDownHandler
     void Start()
     {
         mainCamera = Camera.main;
+        player = NetworkClient.connection.identity.GetComponent<RtsNetworkPlayer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player == null)
-        {
-            player = NetworkClient.connection.identity.GetComponent<RtsNetworkPlayer>();
-        }
-
         if (building != null)
         {
             SetButtonSprite(building);

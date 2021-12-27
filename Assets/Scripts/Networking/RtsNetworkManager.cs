@@ -15,17 +15,18 @@ public class RtsNetworkManager : NetworkManager
 
     public List<RtsNetworkPlayer> Players { get { return players; } }
 
+    public static event Action OnServerHostLeave;
+
     public static event Action OnClientConnectToLobby;
     public static event Action OnClientDisconnectFromLobby;
 
     #region Server
     public override void OnStopServer()
     {
-        base.OnStopServer();
-
         Players.Clear();
 
         isGameInProgress = false;
+        OnServerHostLeave?.Invoke();
     }
 
     public void StartGame()
@@ -48,10 +49,10 @@ public class RtsNetworkManager : NetworkManager
 
     public override void OnServerDisconnect(NetworkConnection conn)
     {
-        base.OnServerDisconnect(conn);
-
         RtsNetworkPlayer disconnectedPlayer = conn.identity.GetComponent<RtsNetworkPlayer>();
         players.Remove(disconnectedPlayer);
+
+        base.OnServerDisconnect(conn);
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn)

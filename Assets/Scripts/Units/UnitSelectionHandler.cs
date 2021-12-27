@@ -19,6 +19,7 @@ public class UnitSelectionHandler : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
+        player = NetworkClient.connection.identity.GetComponent<RtsNetworkPlayer>();
 
         Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
         GameManager.ClientOnGameOver += ClientHandlePlayerDefeat;
@@ -32,10 +33,6 @@ public class UnitSelectionHandler : MonoBehaviour
 
     void Update()
     {
-        if (player == null)
-        {
-            player = NetworkClient.connection.identity.GetComponent<RtsNetworkPlayer>();
-        }
         HandleSelection();
     }
 

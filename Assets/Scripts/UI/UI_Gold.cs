@@ -13,19 +13,13 @@ public class UI_Gold : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        goldText = GetComponentInChildren<TMP_Text>();     
-    }
-    private void Update()
-    {
-        if (player == null)
-        {
-            player = NetworkClient.connection.identity.GetComponent<RtsNetworkPlayer>();
-            
-            bank = player.GetComponent<PlayerBank>();
-            bank.ClientOnGoldUpdate += SetCurrentGold;
+        goldText = GetComponentInChildren<TMP_Text>();
+        player = NetworkClient.connection.identity.GetComponent<RtsNetworkPlayer>();
 
-            SetCurrentGold(bank.StartingGold);
-        }
+        bank = player.GetComponent<PlayerBank>();
+        bank.ClientOnGoldUpdate += SetCurrentGold;
+
+        SetCurrentGold(bank.StartingGold);
     }
 
     void OnDestroy()
